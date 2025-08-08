@@ -76,7 +76,35 @@
 			}
 
 			nav {
-				display: none;
+				display: block; // Keep navigation visible on small screens
+				right: 0.5em;
+				top: 0;
+				height: 2.5em;
+				line-height: 2.5em;
+
+				ul {
+					display: flex;
+					align-items: center;
+					gap: 0.4em;
+					margin: 0;
+					padding-left: 0.25em;
+					flex-wrap: nowrap;
+					white-space: nowrap;
+					overflow-x: auto; // Prevent overflow on very small screens
+					-webkit-overflow-scrolling: touch;
+
+					li {
+						margin-left: 0.25em;
+						font-size: 0.85em;
+					}
+				}
+			}
+
+			// Ensure logo scales on mobile
+			img {
+				height: 2em !important;
+				width: auto;
+				vertical-align: middle;
 			}
 		}
 	}

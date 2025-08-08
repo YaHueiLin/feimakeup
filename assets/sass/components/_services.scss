@@ -1,0 +1,63 @@
+/* Services cards layout */
+.services-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+  margin-top: 2em;
+}
+.service-item {
+  background: #fefefe !important;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 1.5em 0.3em;
+  text-align: center;
+  width: 330px;
+  box-sizing: border-box;
+  transition: transform 0.2s;
+  will-change: transform;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1em;
+    background: #000 !important;
+  }
+
+  ul li {
+    color: #333;
+    text-align: left;
+    padding-left: 1em;
+    margin: 0 auto;
+    font-size: 0.9em;
+  }
+
+  h3 {
+    margin: 0.5em 0 0.3em 0;
+    font-size: 1.3em;
+    color: #000000 !important;
+    font-family: 'Caveat', cursive;
+  }
+
+  p {
+    color: #000000 !important;
+    font-size: 1em;
+  }
+
+  &.travel-fee {
+    width: 100%;
+    max-width: 1050px;
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+}

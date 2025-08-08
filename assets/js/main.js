@@ -137,7 +137,8 @@
 							leave:		function() { $(this).addClass('inactive'); }
 						});
 
-					$('.main.style2')
+					// For generic style2 sections except #one (About), keep default behavior.
+					$('.main.style2').not('#one')
 						.scrollex({
 							mode:		'middle',
 							delay:		100,
@@ -145,6 +146,17 @@
 							terminate:	function() { $(this).removeClass('inactive'); },
 							enter:		function() { $(this).removeClass('inactive'); },
 							leave:		function() { $(this).addClass('inactive'); }
+						});
+
+					// About section (#one): animate in once, then stay visible (no leave re-hide).
+					$('#one')
+						.scrollex({
+							mode:		'middle',
+							delay:		100,
+							initialize:	function() { $(this).addClass('inactive'); },
+							terminate:	function() { $(this).removeClass('inactive'); },
+							enter:		function() { $(this).removeClass('inactive'); },
+							leave:		function() { /* keep visible after first animation */ }
 						});
 
 				// Contact.

@@ -6,7 +6,10 @@
 -->
 <html lang="en">
 	<head>
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<!-- Use minified CSS if present; main.css is unminified dev build -->
+		<link rel="preload" href="assets/css/main.min.css" as="style" />
+		<link rel="stylesheet" href="assets/css/main.min.css" media="all" onload="this.media='all'" />
+		<noscript><link rel="stylesheet" href="assets/css/main.min.css" /></noscript>
 		<title>Fei Lin | Bridal Makeup & Hair | Seattle</title>
 		<link rel="icon" href="other/favicon.png" type="image/png">
 		<meta charset="utf-8" />
@@ -55,7 +58,7 @@
 
 		<!-- One -->
 			<section id="one" class="main style2 right dark fullscreen">
-				<img src="other/about.jpg" alt="Fei Lin" loading="lazy" decoding="async" style="float:left; margin: 3em 2em 3em 3em; width:500px; border-radius:10px;">
+				<img class="about-photo" src="other/about.jpg" alt="Fei Lin" loading="lazy" decoding="async">
 				<div class="content box style2">
 					<header>
 						<h2>About Fei Lin</h2>
@@ -67,9 +70,9 @@
 						To me, makeup isn’t about transformation—it’s about helping you feel confident, the best version of yourself.
 					</p>
 					<p>
-						<a href="https://www.instagram.com/fei_makeup_tw/" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
-						<a href="mailto:mubyfei@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a>
-						<a href="https://www.facebook.com/profile.php?id=100094863158609" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+						<a href="https://www.instagram.com/fei_makeup_tw/" class="icon brands fa-instagram" style="font-size:2rem; line-height:1;"><span class="label">Instagram</span></a>&nbsp;&nbsp;
+						<a href="mailto:mubyfei@gmail.com" class="icon solid fa-envelope" style="font-size:2rem; line-height:1;"><span class="label">Email</span></a>&nbsp;&nbsp;
+						<a href="https://www.facebook.com/profile.php?id=100094863158609" class="icon brands fa-facebook-f" style="font-size:2rem; line-height:1;"><span class="label">Facebook</span></a>
 					</p>
 					<p>
 						我是住在西雅圖的 Fei Lin，一位來自台灣的彩妝與髮型設計師。多年來，我專注於新娘與活動造型，並於 2025 年移居美國，持續投入我所熱愛的妝髮事業。
@@ -166,18 +169,18 @@
 
 					<!-- Gallery with lightbox -->
 					<div class="gallery custom-gallery">
-						<a class="gallery-img image fit" href="images/fulls/01.jpg" title="Bridal look 01"><img src="images/thumbs/01.jpg" alt="Bridal makeup style 01" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/02.jpg" title="Bridal look 02"><img src="images/thumbs/02.jpg" alt="Bridal makeup style 02" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/03.jpg" title="Bridal look 03"><img src="images/thumbs/03.jpg" alt="Bridal makeup style 03" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/04.jpg" title="Bridal look 04"><img src="images/thumbs/04.jpg" alt="Bridal makeup style 04" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/05.jpg" title="Bridal look 05"><img src="images/thumbs/05.jpg" alt="Bridal makeup style 05" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/06.jpg" title="Bridal look 06"><img src="images/thumbs/06.jpg" alt="Bridal makeup style 06" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/07.jpg" title="Bridal look 07"><img src="images/thumbs/07.jpg" alt="Bridal makeup style 07" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/08.jpg" title="Bridal look 08"><img src="images/thumbs/08.jpg" alt="Bridal makeup style 08" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/09.jpg" title="Bridal look 09"><img src="images/thumbs/09.jpg" alt="Bridal makeup style 09" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/10.jpg" title="Bridal look 10"><img src="images/thumbs/10.jpg" alt="Bridal makeup style 10" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/11.jpg" title="Bridal look 11"><img src="images/thumbs/11.jpg" alt="Bridal makeup style 11" loading="lazy" decoding="async" fetchpriority="low"></a>
-						<a class="gallery-img image fit" href="images/fulls/12.jpg" title="Bridal look 12"><img src="images/thumbs/12.jpg" alt="Bridal makeup style 12" loading="lazy" decoding="async" fetchpriority="low"></a>
+						<a class="gallery-img image fit" href="images/fulls/01.avif" title="Bridal look 01"><picture><source type="image/avif" srcset="images/thumbs/01.avif"><source type="image/webp" srcset="images/thumbs/01.webp"><img src="images/thumbs/01.jpg" alt="Bridal makeup style 01" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/02.avif" title="Bridal look 02"><picture><source type="image/avif" srcset="images/thumbs/02.avif"><source type="image/webp" srcset="images/thumbs/02.webp"><img src="images/thumbs/02.jpg" alt="Bridal makeup style 02" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/03.avif" title="Bridal look 03"><picture><source type="image/avif" srcset="images/thumbs/03.avif"><source type="image/webp" srcset="images/thumbs/03.webp"><img src="images/thumbs/03.jpg" alt="Bridal makeup style 03" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/04.avif" title="Bridal look 04"><picture><source type="image/avif" srcset="images/thumbs/04.avif"><source type="image/webp" srcset="images/thumbs/04.webp"><img src="images/thumbs/04.jpg" alt="Bridal makeup style 04" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/05.avif" title="Bridal look 05"><picture><source type="image/avif" srcset="images/thumbs/05.avif"><source type="image/webp" srcset="images/thumbs/05.webp"><img src="images/thumbs/05.jpg" alt="Bridal makeup style 05" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/06.avif" title="Bridal look 06"><picture><source type="image/avif" srcset="images/thumbs/06.avif"><source type="image/webp" srcset="images/thumbs/06.webp"><img src="images/thumbs/06.jpg" alt="Bridal makeup style 06" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/07.avif" title="Bridal look 07"><picture><source type="image/avif" srcset="images/thumbs/07.avif"><source type="image/webp" srcset="images/thumbs/07.webp"><img src="images/thumbs/07.jpg" alt="Bridal makeup style 07" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/08.avif" title="Bridal look 08"><picture><source type="image/avif" srcset="images/thumbs/08.avif"><source type="image/webp" srcset="images/thumbs/08.webp"><img src="images/thumbs/08.jpg" alt="Bridal makeup style 08" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/09.avif" title="Bridal look 09"><picture><source type="image/avif" srcset="images/thumbs/09.avif"><source type="image/webp" srcset="images/thumbs/09.webp"><img src="images/thumbs/09.jpg" alt="Bridal makeup style 09" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/10.avif" title="Bridal look 10"><picture><source type="image/avif" srcset="images/thumbs/10.avif"><source type="image/webp" srcset="images/thumbs/10.webp"><img src="images/thumbs/10.jpg" alt="Bridal makeup style 10" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/11.avif" title="Bridal look 11"><picture><source type="image/avif" srcset="images/thumbs/11.avif"><source type="image/webp" srcset="images/thumbs/11.webp"><img src="images/thumbs/11.jpg" alt="Bridal makeup style 11" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/12.avif" title="Bridal look 12"><picture><source type="image/avif" srcset="images/thumbs/12.avif"><source type="image/webp" srcset="images/thumbs/12.webp"><img src="images/thumbs/12.jpg" alt="Bridal makeup style 12" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
 					</div>
 			</section>
 
@@ -233,7 +236,7 @@
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js" defer></script>
 			<script src="assets/js/jquery.poptrox.min.js" defer></script>
-			<!-- Removed jquery.scrolly for instant anchor jumps -->
+			<!-- Removed jquery.scrolly (file deleted) for instant anchor jumps and smaller JS bundle -->
 			<script src="assets/js/jquery.scrollex.min.js" defer></script>
 			<script src="assets/js/browser.min.js" defer></script>
 			<script src="assets/js/breakpoints.min.js" defer></script>
