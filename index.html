@@ -55,6 +55,13 @@
 			#header nav ul { -webkit-overflow-scrolling: touch; }
 			/* Use CSS var for iOS visual viewport when available */
 			.main.fullscreen { min-height: calc(var(--vh, 1vh) * 100); }
+
+			/* Ensure About section stacks image above text on small screens (iPhone Safari) */
+			@media screen and (max-width: 736px) {
+				#About { display: flex !important; flex-direction: column; align-items: center; padding-top: 3em; }
+				#About .about-photo { float: none !important; width: min(90vw, 520px); height: auto; margin: 1em auto !important; order: 0; }
+				#About .content { width: 100% !important; max-width: 92vw !important; margin: 0 auto; text-align: left; }
+			}
 		</style>
 		<script>
 		(function(){
