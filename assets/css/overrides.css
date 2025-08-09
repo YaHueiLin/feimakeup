@@ -8,9 +8,10 @@ html { scroll-behavior: smooth; }
 /* Use CSS var for iOS visual viewport when available */
 .main.fullscreen { min-height: calc(var(--vh, 1vh) * 100); }
 
-/* Portfolio thumbnails: ensure correct sizing in Chrome desktop */
+/* Portfolio thumbnails: ensure correct sizing and remove dimming overlay */
 .gallery.custom-gallery .gallery-img { position: relative; transform: none; }
-.gallery.custom-gallery .gallery-img:before { display: none; }
+.gallery.custom-gallery .gallery-img:before { display: none !important; content: none !important; background: none !important; }
+.gallery.custom-gallery .gallery-img img { filter: none !important; opacity: 1 !important; mix-blend-mode: normal !important; }
 .gallery.custom-gallery .gallery-img picture { display: block; width: 100%; height: 100%; }
 .gallery.custom-gallery .gallery-img picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
