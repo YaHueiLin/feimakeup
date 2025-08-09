@@ -8,6 +8,11 @@
 	<head>
 		<!-- Browser compatibility meta tags -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- iOS Safari specific meta tags -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="mobile-web-app-capable" content="yes">
 		<link rel="preload" href="assets/css/main.min.css" as="style" />
 		<link rel="stylesheet" href="assets/css/main.min.css" media="all" onload="this.media='all'" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
@@ -15,7 +20,8 @@
 		<title>Fei Lin | Bridal Makeup & Hair | Seattle</title>
 		<link rel="icon" href="other/favicon.png" type="image/png">
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!-- Enhanced viewport for iOS Safari -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
 		<meta name="description" content="Seattle-based bridal makeup and hair artist specializing in elegant, natural looks for weddings and events. Bilingual (EN/中文)." />
 		<meta property="og:title" content="Fei Lin | Bridal Makeup & Hair" />
 		<meta name="keywords" content="Seattle, makeup, hair, wedding, bridal, bridal makeup, bridal hair, wedding makeup, wedding hair, Seattle makeup artist, Seattle hair stylist, Seattle bridal, Seattle wedding, Asian bridal makeup, Asian wedding hair, event makeup, event hair, Fei Lin" />
@@ -30,7 +36,7 @@
 		<link rel="preload" href="assets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
-		
+
 		<!-- Picture element polyfill for IE/older browsers -->
 		<script>
 			document.createElement("picture");
@@ -38,7 +44,7 @@
 		<!--[if lt IE 9]>
 			<script src="https://cdn.jsdelivr.net/npm/picturefill@3.0.3/dist/picturefill.min.js"></script>
 		<![endif]-->
-		
+
 		<!-- Object-fit polyfill for IE/Edge compatibility -->
 		<script>
 			// Object-fit polyfill for older browsers
@@ -56,6 +62,44 @@
 					});
 				});
 			}
+			
+			// iOS Safari specific fixes
+			(function() {
+				var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+				var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+				
+				if (isIOS || (isSafari && /Macintosh/.test(navigator.userAgent))) {
+					// Fix for iOS viewport height
+					function setVH() {
+						var vh = window.innerHeight * 0.01;
+						document.documentElement.style.setProperty('--vh', vh + 'px');
+					}
+					
+					window.addEventListener('resize', setVH);
+					window.addEventListener('orientationchange', function() {
+						setTimeout(setVH, 200);
+					});
+					setVH();
+					
+					// Prevent iOS bounce scroll
+					document.addEventListener('touchmove', function(e) {
+						if (e.target.closest('.gallery') || e.target.closest('textarea') || e.target.closest('input')) {
+							return;
+						}
+						e.preventDefault();
+					}, { passive: false });
+					
+					// Fix iOS form focus issues
+					document.addEventListener('focusin', function(e) {
+						if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+							setTimeout(function() {
+								window.scrollTo(0, 0);
+								document.body.scrollTop = 0;
+							}, 0);
+						}
+					});
+				}
+			})();
 		</script>
 	</head>
 	<body class="is-preload" data-theme="dark">
@@ -248,6 +292,81 @@
 					</ul>
 
 			</footer>
+
+		<!-- iOS Safari Compatibility JavaScript -->
+		<script>
+			// iOS Safari Polyfills and Fixes
+			(function() {
+				'use strict';
+				
+				// iOS Detection
+				var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+				var isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+				var isIOSSafari = isIOS && isSafari;
+				
+				if (isIOSSafari) {
+					// Add iOS class to body for CSS targeting
+					document.body.classList.add('ios-safari');
+					
+					// Fix viewport height issues
+					function setViewportHeight() {
+						var vh = window.innerHeight * 0.01;
+						document.documentElement.style.setProperty('--vh', vh + 'px');
+					}
+					
+					// Set initial viewport height
+					setViewportHeight();
+					
+					// Update on resize and orientation change
+					window.addEventListener('resize', setViewportHeight);
+					window.addEventListener('orientationchange', function() {
+						setTimeout(setViewportHeight, 100);
+					});
+					
+					// Fix form input zoom on iOS
+					document.addEventListener('DOMContentLoaded', function() {
+						var inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
+						for (var i = 0; i < inputs.length; i++) {
+							var input = inputs[i];
+							if (input.style.fontSize === '' || parseFloat(input.style.fontSize) < 16) {
+								input.style.fontSize = '16px';
+							}
+						}
+					});
+					
+					// Improve touch performance
+					document.addEventListener('touchstart', function() {
+						// Enable fast tap
+					}, { passive: true });
+					
+					// Fix scrolling momentum
+					var scrollElements = document.querySelectorAll('.scrollable, .gallery, .main');
+					for (var i = 0; i < scrollElements.length; i++) {
+						scrollElements[i].style.webkitOverflowScrolling = 'touch';
+					}
+					
+					// Handle visual viewport changes (keyboard appearance)
+					if (window.visualViewport) {
+						window.visualViewport.addEventListener('resize', function() {
+							setViewportHeight();
+						});
+					}
+				}
+				
+				// General mobile optimizations
+				if (window.navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+					// Prevent default touch behaviors that can interfere
+					document.addEventListener('touchmove', function(e) {
+						if (e.target.closest('.gallery') || e.target.closest('.scrollable')) {
+							return; // Allow scrolling in gallery and scrollable areas
+						}
+					}, { passive: true });
+					
+					// Add mobile class
+					document.body.classList.add('mobile-device');
+				}
+			})();
+		</script>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js" defer></script>

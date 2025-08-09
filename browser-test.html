@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Enhanced viewport for iOS Safari -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <!-- iOS Safari specific meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <title>Browser Compatibility Test - Fei Lin Makeup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .flex-test {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .flex-item {
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            min-width: 200px;
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .transform-test {
+            width: 50px;
+            height: 50px;
+            background: #4caf50;
+            margin: 10px;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        .transform-test:hover {
+            -webkit-transform: rotate(90deg) scale(1.2);
+            -moz-transform: rotate(90deg) scale(1.2);
+            -ms-transform: rotate(90deg) scale(1.2);
+            transform: rotate(90deg) scale(1.2);
+        }
+        .picture-test img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            -o-object-fit: cover;
+            border-radius: 50%;
+        }
+        .css-check {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .css-fail {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        // Object-fit polyfill check
+        if (!('objectFit' in document.documentElement.style)) {
+            document.addEventListener('DOMContentLoaded', function() {
+                var images = document.querySelectorAll('img[data-object-fit]');
+                images.forEach(function(img) {
+                    if (img.getAttribute('data-object-fit') === 'cover') {
+                        img.style.display = 'none';
+                        img.parentNode.style.backgroundImage = 'url(' + img.src + ')';
+                        img.parentNode.style.backgroundSize = 'cover';
+                        img.parentNode.style.backgroundPosition = 'center';
+                        img.parentNode.style.backgroundRepeat = 'no-repeat';
+                    }
+                });
+            });
+        }
+
+        window.onload = function() {
+            // Feature detection
+            var supports = {
+                flexbox: (function() {
+                    var div = document.createElement('div');
+                    return 'flex' in div.style || 'webkitFlex' in div.style || 'msFlexbox' in div.style;
+                })(),
+                transforms: (function() {
+                    var div = document.createElement('div');
+                    return 'transform' in div.style || 'webkitTransform' in div.style || 'msTransform' in div.style;
+                })(),
+                transitions: (function() {
+                    var div = document.createElement('div');
+                    return 'transition' in div.style || 'webkitTransition' in div.style || 'msTransition' in div.style;
+                })(),
+                objectFit: 'objectFit' in document.documentElement.style,
+                picture: !!window.HTMLPictureElement,
+                touchCallout: 'webkitTouchCallout' in document.documentElement.style,
+                overflowScrolling: 'webkitOverflowScrolling' in document.documentElement.style
+            };
+
+            // Update status
+            for (var feature in supports) {
+                var elem = document.getElementById(feature + '-support');
+                if (elem) {
+                    elem.textContent = supports[feature] ? '✓ Supported' : '✗ Not Supported (Polyfill Active)';
+                    elem.className = supports[feature] ? 'css-check' : 'css-fail';
+                }
+            }
+
+            // iOS Safari detection
+            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            document.getElementById('ios-detected').textContent = isIOS ? '✓ iOS Device' : '✗ Not iOS';
+            document.getElementById('ios-detected').className = isIOS ? 'css-check' : 'css-fail';
+            
+            document.getElementById('safari-detected').textContent = isSafari ? '✓ Safari Browser' : '✗ Not Safari';
+            document.getElementById('safari-detected').className = isSafari ? 'css-check' : 'css-fail';
+
+            // Browser info
+            document.getElementById('browser-info').textContent = navigator.userAgent;
+            
+            // Viewport info
+            document.getElementById('viewport-info').textContent = 
+                'Screen: ' + screen.width + 'x' + screen.height + 
+                ', Window: ' + window.innerWidth + 'x' + window.innerHeight +
+                ', DevicePixelRatio: ' + (window.devicePixelRatio || 1);
+        };
+    </script>
+</head>
+<body>
+    <h1>瀏覽器相容性測試 - Browser Compatibility Test</h1>
+
+    <div class="test-section">
+        <h2>瀏覽器資訊 - Browser Information</h2>
+        <p id="browser-info">Loading...</p>
+        <p id="viewport-info">Loading viewport info...</p>
+    </div>
+
+    <div class="test-section">
+        <h2>iOS Safari 檢測 - iOS Safari Detection</h2>
+        <ul>
+            <li>iOS Device: <span id="ios-detected">檢測中...</span></li>
+            <li>Safari Browser: <span id="safari-detected">檢測中...</span></li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>功能支援檢測 - Feature Support Detection</h2>
+        <ul>
+            <li>Flexbox: <span id="flexbox-support">檢測中...</span></li>
+            <li>CSS Transforms: <span id="transforms-support">檢測中...</span></li>
+            <li>CSS Transitions: <span id="transitions-support">檢測中...</span></li>
+            <li>Object-fit: <span id="objectFit-support">檢測中...</span></li>
+            <li>Picture Element: <span id="picture-support">檢測中...</span></li>
+            <li>Touch Callout (iOS): <span id="touchCallout-support">檢測中...</span></li>
+            <li>Overflow Scrolling (iOS): <span id="overflowScrolling-support">檢測中...</span></li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>Flexbox 測試 - Flexbox Test</h2>
+        <p>以下區塊應該以彈性布局排列：</p>
+        <div class="flex-test">
+            <div class="flex-item">Flex Item 1</div>
+            <div class="flex-item">Flex Item 2</div>
+            <div class="flex-item">Flex Item 3</div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Transform & Transition 測試 - Transform & Transition Test</h2>
+        <p>將滑鼠移到綠色方塊上應該看到旋轉和縮放效果：</p>
+        <div class="transform-test"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>圖片相容性測試 - Image Compatibility Test</h2>
+        <p>以下是 Picture element 和 object-fit 測試：</p>
+        <div class="picture-test">
+            <picture>
+                <source type="image/webp" srcset="images/thumbs/01.webp">
+                <img src="images/thumbs/01.jpg" alt="Test image" data-object-fit="cover" style="width: 100px; height: 100px; border-radius: 50%;">
+            </picture>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>測試說明 - Test Instructions</h2>
+        <p><strong>Chrome 測試：</strong></p>
+        <ul>
+            <li>所有功能應該顯示為 "✓ Supported"</li>
+            <li>Flexbox 布局應該正常顯示</li>
+            <li>變換效果應該流暢</li>
+        </ul>
+
+        <p><strong>Edge 測試：</strong></p>
+        <ul>
+            <li>大部分功能應該支援</li>
+            <li>如果有 polyfill active，功能仍應正常運作</li>
+        </ul>
+
+        <p><strong>IE11 測試：</strong></p>
+        <ul>
+            <li>可能顯示一些 "✗ Not Supported"，但應該有 polyfill 備援</li>
+            <li>基本布局和功能應該可用</li>
+        </ul>
+    </div>
+</body>
+</html>
