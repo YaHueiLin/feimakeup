@@ -43,6 +43,9 @@
 	@import 'components/table';
 	@import 'components/poptrox-popup';
 	@import 'components/gallery';
+	// Custom additions
+	@import 'components/custom-gallery';
+	@import 'components/services';
 
 // Layout.
 
@@ -55,28 +58,63 @@
 	#intro {
 		background: url('images/overlay.png'), url('../../images/intro.jpg');
 		background-size: 256px 256px, cover;
-		background-attachment: fixed, fixed;
-		background-position: top left, bottom center;
+		// Parallax removed for smoother scrolling & less paint cost
+		background-attachment: scroll, scroll;
+		background-position: top left, center center;
 		background-repeat: repeat, no-repeat;
 	}
 
-/* One */
+/* About */
 
-	#one {
+	#About {
 		background: url('images/overlay.png'), url('../../images/one.jpg');
 		background-size: 256px 256px, cover;
-		background-attachment: fixed, fixed;
+		background-attachment: scroll, scroll;
 		background-position: top left, center center;
 	}
 
-/* Two */
+/* Services */
 
-	#two {
-		background: url('images/overlay.png'), url('../../images/two.jpg');
+	#Services {
+		// Use existing one.jpg (two.jpg not present). Same visual for now.
+		background: url('images/overlay.png'), url('../../images/one.jpg');
 		background-size: 256px 256px, cover;
-		background-attachment: fixed, fixed;
+		background-attachment: scroll, scroll;
 		background-position: top left, center center;
 	}
+
+/* About section image (desktop/tablet) */
+.about-photo {
+	float: left;
+	margin: 3em 2em 3em 3em;
+	width: 500px;
+	max-width: 45vw;
+	height: auto;
+	border-radius: 10px;
+	display: block;
+}
+
+/* Mobile stacking for About (#About) */
+@include breakpoint('<=small') {
+	#About img {
+		max-width: 90vw;
+		height: auto;
+		float: none !important;
+		display: block;
+		margin: 1em auto !important;
+	}
+	#About.main.style2 {
+		display: block;
+		padding-top: 3em;
+	}
+	#About.main.style2 > .content {
+		width: 100% !important;
+		max-width: 92vw !important;
+		margin: 0 auto;
+		text-align: left;
+		header h2 { text-align: center; }
+	}
+}
 
 /* Contact */
 
