@@ -1,5 +1,12 @@
 # Fei Lin Bridal Makeup & Hair Website
 
+SEO Keywords: Seattle, makeup, hair, wedding, bridal, bridal makeup, bridal hair, wedding makeup, wedding hair, Seattle makeup artist, Seattle hair stylist, Seattle bridal, Seattle wedding, Asian bridal makeup, Asian wedding hair, event makeup, event hair, Fei Lin
+
+Single-page responsive portfolio & contact site built from the HTML5 UP "Big Picture" template, refactored for performance, accessibility, and maintainability.
+
+## Key Features
+# Fei Lin Bridal Makeup & Hair Website
+
 Single-page responsive portfolio & contact site built from the HTML5 UP "Big Picture" template, refactored for performance, accessibility, and maintainability.
 
 ## Key Features
