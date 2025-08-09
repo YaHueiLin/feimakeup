@@ -15,8 +15,8 @@
 		<meta name="mobile-web-app-capable" content="yes">
 		<link rel="preload" href="assets/css/main.min.css" as="style" />
 		<link rel="stylesheet" href="assets/css/main.min.css" media="all" onload="this.media='all'" />
+		<link rel="stylesheet" href="assets/css/overrides.css" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<noscript><link rel="stylesheet" href="assets/css/main.min.css" /></noscript>
 		<title>Fei Lin | Bridal Makeup & Hair | Seattle</title>
 		<link rel="icon" href="other/favicon.png" type="image/png">
 		<meta charset="utf-8" />
@@ -37,65 +37,8 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 
-		<!-- Picture element polyfill for IE/older browsers -->
-		<script>document.createElement('picture');</script>
-		<!--[if lt IE 9]>
-			<script src="https://cdn.jsdelivr.net/npm/picturefill@3.0.3/dist/picturefill.min.js"></script>
-		<![endif]-->
-
-		<!-- Lightweight mobile compatibility helpers (safe scrolling + iOS vh fix) -->
-		<style>
-			/**** Mobile polish ****/
-			html, body { -webkit-text-size-adjust: 100%; }
-			/* Reduce 300ms tap delay side-effects and highlight */
-			a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-			/* Smooth anchor scroll without JS */
-			html { scroll-behavior: smooth; }
-			/* Momentum scroll for horizontal nav on iOS */
-			#header nav ul { -webkit-overflow-scrolling: touch; }
-			/* Use CSS var for iOS visual viewport when available */
-			.main.fullscreen { min-height: calc(var(--vh, 1vh) * 100); }
-
-			/* Ensure About section stacks image above text on small screens (iPhone Safari) */
-			@media screen and (max-width: 736px) {
-				#About { display: flex !important; flex-direction: column; align-items: center; padding-top: 3em; }
-				#About .about-photo { float: none !important; width: min(90vw, 520px); height: auto; margin: 1em auto !important; order: 0; }
-				#About .content { width: 100% !important; max-width: 92vw !important; margin: 0 auto; text-align: left; }
-			}
-		</style>
-		<script>
-		(function(){
-			// Minimal object-fit fallback for very old browsers
-			if (!('objectFit' in document.documentElement.style)) {
-				document.addEventListener('DOMContentLoaded', function() {
-					document.querySelectorAll('img[data-object-fit="cover"]').forEach(function(img){
-						var p = img.parentNode; if (!p) return;
-						img.style.display = 'none';
-						p.style.background = 'center/cover no-repeat url(' + img.src + ')';
-					});
-				});
-			}
-
-			// iOS visual viewport height fix (no global touchmove prevention)
-			var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-			function setVH(){
-				var h = (window.visualViewport ? Math.round(window.visualViewport.height) : window.innerHeight) || window.innerHeight;
-				var vh = h * 0.01; document.documentElement.style.setProperty('--vh', vh + 'px');
-			}
-			if (isIOS) {
-				document.addEventListener('DOMContentLoaded', setVH, { once: true });
-				window.addEventListener('resize', setVH);
-				window.addEventListener('orientationchange', function(){ setTimeout(setVH, 200); });
-				if (window.visualViewport) window.visualViewport.addEventListener('resize', setVH);
-				// Ensure inputs remain visible when keyboard opens
-				document.addEventListener('focusin', function(e){
-					if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) {
-						setTimeout(function(){ try { e.target.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch(_){} }, 150);
-					}
-				});
-			}
-		})();
-		</script>
+		<!-- Lightweight mobile compatibility helpers -->
+		<script src="assets/js/mobile-fixes.js" defer></script>
 	</head>
 	<body class="is-preload" data-theme="dark">
 
