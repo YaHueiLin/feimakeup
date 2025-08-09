@@ -8,9 +8,22 @@ html { scroll-behavior: smooth; }
 /* Use CSS var for iOS visual viewport when available */
 .main.fullscreen { min-height: calc(var(--vh, 1vh) * 100); }
 
+/* Portfolio thumbnails: ensure correct sizing in Chrome desktop */
+.gallery.custom-gallery .gallery-img { position: relative; transform: none; }
+.gallery.custom-gallery .gallery-img:before { display: none; }
+.gallery.custom-gallery .gallery-img picture { display: block; width: 100%; height: 100%; }
+.gallery.custom-gallery .gallery-img picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 /* Ensure About section stacks image above text on small screens (iPhone Safari) */
 @media screen and (max-width: 736px) {
   #About { display: flex !important; flex-direction: column; align-items: center; padding-top: 3em; }
   #About .about-photo { float: none !important; width: min(90vw, 520px); height: auto; margin: 1em auto !important; order: 0; }
   #About .content { width: 100% !important; max-width: 92vw !important; margin: 0 auto; text-align: left; }
+}
+
+/* Match About heading font with Services titles (Caveat) */
+#about-heading {
+  font-family: "Caveat", cursive !important;
+  font-weight: 600;
+  color: #000 !important;
 }
