@@ -62,42 +62,127 @@
 					});
 				});
 			}
-			
+
 			// iOS Safari specific fixes
 			(function() {
 				var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 				var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-				
-				if (isIOS || (isSafari && /Macintosh/.test(navigator.userAgent))) {
-					// Fix for iOS viewport height
-					function setVH() {
-						var vh = window.innerHeight * 0.01;
-						document.documentElement.style.setProperty('--vh', vh + 'px');
-					}
+				var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+				// Enhanced mobile scrolling fixes
+				if (isMobile) {
+					// Add mobile class early
+					document.documentElement.classList.add('mobile-device');
 					
-					window.addEventListener('resize', setVH);
-					window.addEventListener('orientationchange', function() {
-						setTimeout(setVH, 200);
-					});
-					setVH();
-					
-					// Prevent iOS bounce scroll
-					document.addEventListener('touchmove', function(e) {
-						if (e.target.closest('.gallery') || e.target.closest('textarea') || e.target.closest('input')) {
+					// Prevent default touch behavior that interferes with scrolling
+					var preventDefaults = function(e) {
+						// Allow scrolling in specific areas
+						if (e.target.closest('.gallery') || 
+							e.target.closest('textarea') || 
+							e.target.closest('input') ||
+							e.target.closest('.poptrox-popup') ||
+							e.target.tagName === 'A' ||
+							e.target.tagName === 'BUTTON') {
 							return;
 						}
-						e.preventDefault();
-					}, { passive: false });
+						
+						// Prevent bounce scrolling at document level
+						if (e.target === document || e.target === document.body) {
+							e.preventDefault();
+						}
+					};
 					
-					// Fix iOS form focus issues
+					// Improved touch event handling
+					document.addEventListener('touchstart', function(e) {
+						// Enable momentum scrolling for specific elements
+						var scrollableElements = document.querySelectorAll('.main, .gallery, .poptrox-popup');
+						scrollableElements.forEach(function(el) {
+							el.style.webkitOverflowScrolling = 'touch';
+						});
+					}, { passive: true });
+					
+					document.addEventListener('touchmove', preventDefaults, { passive: false });
+				}
+
+				if (isIOS || (isSafari && /Macintosh/.test(navigator.userAgent))) {
+					// Enhanced iOS viewport height fix
+					function setVH() {
+						// Use visualViewport API if available for better accuracy
+						var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+						var vh = height * 0.01;
+						document.documentElement.style.setProperty('--vh', vh + 'px');
+					}
+
+					// Set initial viewport height
+					setVH();
+					
+					// Listen to both resize and visualViewport changes
+					window.addEventListener('resize', setVH);
+					window.addEventListener('orientationchange', function() {
+						setTimeout(setVH, 250);
+					});
+					
+					// Use visualViewport API for better keyboard handling
+					if (window.visualViewport) {
+						window.visualViewport.addEventListener('resize', setVH);
+					}
+
+					// Enhanced iOS scroll prevention
+					var lastY = 0;
+					document.addEventListener('touchstart', function(e) {
+						lastY = e.touches[0].clientY;
+					}, { passive: true });
+
+					document.addEventListener('touchmove', function(e) {
+						var currentY = e.touches[0].clientY;
+						var direction = currentY > lastY ? 'down' : 'up';
+						
+						// Allow scrolling in content areas
+						if (e.target.closest('.gallery') || 
+							e.target.closest('textarea') || 
+							e.target.closest('input') ||
+							e.target.closest('.main .content') ||
+							e.target.closest('.poptrox-popup')) {
+							return;
+						}
+						
+						// Prevent bounce at document level
+						if ((direction === 'up' && window.pageYOffset === 0) ||
+							(direction === 'down' && window.pageYOffset >= document.documentElement.scrollHeight - window.innerHeight)) {
+							e.preventDefault();
+						}
+						
+						lastY = currentY;
+					}, { passive: false });
+
+					// Fix iOS form focus zoom and scrolling issues
 					document.addEventListener('focusin', function(e) {
 						if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+							// Prevent zoom by ensuring font-size is 16px or larger
+							if (!e.target.style.fontSize || parseInt(e.target.style.fontSize) < 16) {
+								e.target.style.fontSize = '16px';
+							}
+							
+							// Smooth scroll to focused element
 							setTimeout(function() {
-								window.scrollTo(0, 0);
-								document.body.scrollTop = 0;
-							}, 0);
+								e.target.scrollIntoView({ 
+									behavior: 'smooth', 
+									block: 'center',
+									inline: 'nearest'
+								});
+							}, 300);
 						}
 					});
+					
+					// Fix iOS Safari double-tap zoom
+					var lastTouchEnd = 0;
+					document.addEventListener('touchend', function(event) {
+						var now = (new Date()).getTime();
+						if (now - lastTouchEnd <= 300) {
+							event.preventDefault();
+						}
+						lastTouchEnd = now;
+					}, false);
 				}
 			})();
 		</script>
@@ -295,75 +380,167 @@
 
 		<!-- iOS Safari Compatibility JavaScript -->
 		<script>
-			// iOS Safari Polyfills and Fixes
+			// Enhanced iOS Safari Polyfills and Mobile Scrolling Fixes
 			(function() {
 				'use strict';
-				
-				// iOS Detection
+
+				// Device Detection
 				var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 				var isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
 				var isIOSSafari = isIOS && isSafari;
-				
+				var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+				// Add device classes early
+				if (isMobile) {
+					document.body.classList.add('mobile-device');
+				}
 				if (isIOSSafari) {
-					// Add iOS class to body for CSS targeting
 					document.body.classList.add('ios-safari');
-					
-					// Fix viewport height issues
-					function setViewportHeight() {
-						var vh = window.innerHeight * 0.01;
-						document.documentElement.style.setProperty('--vh', vh + 'px');
-					}
-					
-					// Set initial viewport height
+				}
+
+				// Enhanced viewport height management
+				function setViewportHeight() {
+					var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+					var vh = height * 0.01;
+					document.documentElement.style.setProperty('--vh', vh + 'px');
+				}
+
+				// Mobile scrolling optimization
+				function optimizeMobileScrolling() {
+					// Enable momentum scrolling for key elements
+					var scrollableElements = [
+						document.body,
+						document.querySelector('.main'),
+						document.querySelector('.gallery'),
+						document.querySelector('#header nav ul')
+					];
+
+					scrollableElements.forEach(function(element) {
+						if (element) {
+							element.style.webkitOverflowScrolling = 'touch';
+							element.style.transform = 'translateZ(0)';
+						}
+					});
+				}
+
+				// Enhanced touch event management
+				function setupTouchEvents() {
+					var startY = 0;
+					var endY = 0;
+
+					// Improved touch start handler
+					document.addEventListener('touchstart', function(e) {
+						startY = e.touches[0].pageY;
+						optimizeMobileScrolling();
+					}, { passive: true });
+
+					// Smart touch move handler
+					document.addEventListener('touchmove', function(e) {
+						endY = e.touches[0].pageY;
+						var deltaY = startY - endY;
+
+						// Allow scrolling in interactive elements
+						var allowedElements = [
+							'.gallery', '.poptrox-popup', '.main .content', 
+							'textarea', 'input', '.services-list', '#header nav ul'
+						];
+
+						var isAllowedElement = allowedElements.some(function(selector) {
+							return e.target.closest(selector);
+						});
+
+						if (isAllowedElement) {
+							return;
+						}
+
+						// Prevent bounce scrolling at document boundaries
+						var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+						var scrollHeight = document.documentElement.scrollHeight;
+						var clientHeight = document.documentElement.clientHeight;
+
+						if ((deltaY > 0 && scrollTop === 0) || 
+							(deltaY < 0 && scrollTop + clientHeight >= scrollHeight)) {
+							e.preventDefault();
+						}
+					}, { passive: false });
+
+					// Prevent double-tap zoom on iOS
+					var lastTouchEnd = 0;
+					document.addEventListener('touchend', function(event) {
+						var now = (new Date()).getTime();
+						if (now - lastTouchEnd <= 300) {
+							event.preventDefault();
+						}
+						lastTouchEnd = now;
+					}, false);
+				}
+
+				// iOS specific optimizations
+				if (isIOSSafari) {
 					setViewportHeight();
-					
-					// Update on resize and orientation change
+
+					// Listen to all viewport changes
 					window.addEventListener('resize', setViewportHeight);
 					window.addEventListener('orientationchange', function() {
 						setTimeout(setViewportHeight, 100);
 					});
-					
-					// Fix form input zoom on iOS
+
+					if (window.visualViewport) {
+						window.visualViewport.addEventListener('resize', setViewportHeight);
+					}
+
+					// Form input optimization for iOS
 					document.addEventListener('DOMContentLoaded', function() {
 						var inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
-						for (var i = 0; i < inputs.length; i++) {
-							var input = inputs[i];
-							if (input.style.fontSize === '' || parseFloat(input.style.fontSize) < 16) {
+						inputs.forEach(function(input) {
+							// Prevent zoom on focus
+							if (!input.style.fontSize || parseFloat(input.style.fontSize) < 16) {
 								input.style.fontSize = '16px';
 							}
+							
+							// Add hardware acceleration
+							input.style.transform = 'translateZ(0)';
+							input.style.webkitTransform = 'translateZ(0)';
+						});
+					});
+
+					// Enhanced form focus handling
+					document.addEventListener('focusin', function(e) {
+						if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+							setTimeout(function() {
+								// Smooth scroll to element
+								e.target.scrollIntoView({
+									behavior: 'smooth',
+									block: 'center',
+									inline: 'nearest'
+								});
+							}, 150);
 						}
 					});
-					
-					// Improve touch performance
-					document.addEventListener('touchstart', function() {
-						// Enable fast tap
-					}, { passive: true });
-					
-					// Fix scrolling momentum
-					var scrollElements = document.querySelectorAll('.scrollable, .gallery, .main');
-					for (var i = 0; i < scrollElements.length; i++) {
-						scrollElements[i].style.webkitOverflowScrolling = 'touch';
-					}
-					
-					// Handle visual viewport changes (keyboard appearance)
-					if (window.visualViewport) {
-						window.visualViewport.addEventListener('resize', function() {
-							setViewportHeight();
-						});
-					}
 				}
-				
+
 				// General mobile optimizations
-				if (window.navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
-					// Prevent default touch behaviors that can interfere
-					document.addEventListener('touchmove', function(e) {
-						if (e.target.closest('.gallery') || e.target.closest('.scrollable')) {
-							return; // Allow scrolling in gallery and scrollable areas
+				if (isMobile) {
+					setupTouchEvents();
+					optimizeMobileScrolling();
+
+					// Prevent text selection issues on mobile
+					document.addEventListener('selectstart', function(e) {
+						if (e.target.tagName !== 'INPUT' && 
+							e.target.tagName !== 'TEXTAREA' && 
+							!e.target.closest('p, h1, h2, h3, h4, h5, h6')) {
+							e.preventDefault();
 						}
-					}, { passive: true });
-					
-					// Add mobile class
-					document.body.classList.add('mobile-device');
+					});
+
+					// Optimize gallery touch interaction
+					document.addEventListener('DOMContentLoaded', function() {
+						var galleryItems = document.querySelectorAll('.gallery-img');
+						galleryItems.forEach(function(item) {
+							item.style.touchAction = 'manipulation';
+							item.style.webkitTouchCallout = 'none';
+						});
+					});
 				}
 			})();
 		</script>
