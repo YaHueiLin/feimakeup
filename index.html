@@ -73,25 +73,25 @@
 				if (isMobile) {
 					// Add mobile class early
 					document.documentElement.classList.add('mobile-device');
-					
+
 					// Prevent default touch behavior that interferes with scrolling
 					var preventDefaults = function(e) {
 						// Allow scrolling in specific areas
-						if (e.target.closest('.gallery') || 
-							e.target.closest('textarea') || 
+						if (e.target.closest('.gallery') ||
+							e.target.closest('textarea') ||
 							e.target.closest('input') ||
 							e.target.closest('.poptrox-popup') ||
 							e.target.tagName === 'A' ||
 							e.target.tagName === 'BUTTON') {
 							return;
 						}
-						
+
 						// Prevent bounce scrolling at document level
 						if (e.target === document || e.target === document.body) {
 							e.preventDefault();
 						}
 					};
-					
+
 					// Improved touch event handling
 					document.addEventListener('touchstart', function(e) {
 						// Enable momentum scrolling for specific elements
@@ -100,7 +100,7 @@
 							el.style.webkitOverflowScrolling = 'touch';
 						});
 					}, { passive: true });
-					
+
 					document.addEventListener('touchmove', preventDefaults, { passive: false });
 				}
 
@@ -115,13 +115,13 @@
 
 					// Set initial viewport height
 					setVH();
-					
+
 					// Listen to both resize and visualViewport changes
 					window.addEventListener('resize', setVH);
 					window.addEventListener('orientationchange', function() {
 						setTimeout(setVH, 250);
 					});
-					
+
 					// Use visualViewport API for better keyboard handling
 					if (window.visualViewport) {
 						window.visualViewport.addEventListener('resize', setVH);
@@ -136,22 +136,22 @@
 					document.addEventListener('touchmove', function(e) {
 						var currentY = e.touches[0].clientY;
 						var direction = currentY > lastY ? 'down' : 'up';
-						
+
 						// Allow scrolling in content areas
-						if (e.target.closest('.gallery') || 
-							e.target.closest('textarea') || 
+						if (e.target.closest('.gallery') ||
+							e.target.closest('textarea') ||
 							e.target.closest('input') ||
 							e.target.closest('.main .content') ||
 							e.target.closest('.poptrox-popup')) {
 							return;
 						}
-						
+
 						// Prevent bounce at document level
 						if ((direction === 'up' && window.pageYOffset === 0) ||
 							(direction === 'down' && window.pageYOffset >= document.documentElement.scrollHeight - window.innerHeight)) {
 							e.preventDefault();
 						}
-						
+
 						lastY = currentY;
 					}, { passive: false });
 
@@ -162,18 +162,18 @@
 							if (!e.target.style.fontSize || parseInt(e.target.style.fontSize) < 16) {
 								e.target.style.fontSize = '16px';
 							}
-							
+
 							// Smooth scroll to focused element
 							setTimeout(function() {
-								e.target.scrollIntoView({ 
-									behavior: 'smooth', 
+								e.target.scrollIntoView({
+									behavior: 'smooth',
 									block: 'center',
 									inline: 'nearest'
 								});
 							}, 300);
 						}
 					});
-					
+
 					// Fix iOS Safari double-tap zoom
 					var lastTouchEnd = 0;
 					document.addEventListener('touchend', function(event) {
@@ -441,7 +441,7 @@
 
 						// Allow scrolling in interactive elements
 						var allowedElements = [
-							'.gallery', '.poptrox-popup', '.main .content', 
+							'.gallery', '.poptrox-popup', '.main .content',
 							'textarea', 'input', '.services-list', '#header nav ul'
 						];
 
@@ -458,7 +458,7 @@
 						var scrollHeight = document.documentElement.scrollHeight;
 						var clientHeight = document.documentElement.clientHeight;
 
-						if ((deltaY > 0 && scrollTop === 0) || 
+						if ((deltaY > 0 && scrollTop === 0) ||
 							(deltaY < 0 && scrollTop + clientHeight >= scrollHeight)) {
 							e.preventDefault();
 						}
@@ -497,7 +497,7 @@
 							if (!input.style.fontSize || parseFloat(input.style.fontSize) < 16) {
 								input.style.fontSize = '16px';
 							}
-							
+
 							// Add hardware acceleration
 							input.style.transform = 'translateZ(0)';
 							input.style.webkitTransform = 'translateZ(0)';
@@ -526,8 +526,8 @@
 
 					// Prevent text selection issues on mobile
 					document.addEventListener('selectstart', function(e) {
-						if (e.target.tagName !== 'INPUT' && 
-							e.target.tagName !== 'TEXTAREA' && 
+						if (e.target.tagName !== 'INPUT' &&
+							e.target.tagName !== 'TEXTAREA' &&
 							!e.target.closest('p, h1, h2, h3, h4, h5, h6')) {
 							e.preventDefault();
 						}
