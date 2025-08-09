@@ -36,3 +36,11 @@ html { scroll-behavior: smooth; }
 .icon i { font-size: 2rem; line-height: 1; vertical-align: middle; }
 .icons .icon i { font-size: 1.2rem; }
 .icons .icon { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+/* Lightbox: Remove white caption area completely */
+.poptrox-popup {
+  padding-bottom: 0 !important;
+}
+.poptrox-popup .caption {
+  display: none !important;
+}
