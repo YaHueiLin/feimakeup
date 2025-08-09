@@ -21,7 +21,7 @@
 		<link rel="icon" href="other/favicon.png" type="image/png">
 		<meta charset="utf-8" />
 		<!-- Enhanced viewport for iOS Safari -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="description" content="Seattle-based bridal makeup and hair artist specializing in elegant, natural looks for weddings and events. Bilingual (EN/中文)." />
 		<meta property="og:title" content="Fei Lin | Bridal Makeup & Hair" />
 		<meta name="keywords" content="Seattle, makeup, hair, wedding, bridal, bridal makeup, bridal hair, wedding makeup, wedding hair, Seattle makeup artist, Seattle hair stylist, Seattle bridal, Seattle wedding, Asian bridal makeup, Asian wedding hair, event makeup, event hair, Fei Lin" />
@@ -38,153 +38,56 @@
 		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 
 		<!-- Picture element polyfill for IE/older browsers -->
-		<script>
-			document.createElement("picture");
-		</script>
+		<script>document.createElement('picture');</script>
 		<!--[if lt IE 9]>
 			<script src="https://cdn.jsdelivr.net/npm/picturefill@3.0.3/dist/picturefill.min.js"></script>
 		<![endif]-->
 
-		<!-- Object-fit polyfill for IE/Edge compatibility -->
+		<!-- Lightweight mobile compatibility helpers (safe scrolling + iOS vh fix) -->
+		<style>
+			/**** Mobile polish ****/
+			html, body { -webkit-text-size-adjust: 100%; }
+			/* Reduce 300ms tap delay side-effects and highlight */
+			a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+			/* Smooth anchor scroll without JS */
+			html { scroll-behavior: smooth; }
+			/* Momentum scroll for horizontal nav on iOS */
+			#header nav ul { -webkit-overflow-scrolling: touch; }
+			/* Use CSS var for iOS visual viewport when available */
+			.main.fullscreen { min-height: calc(var(--vh, 1vh) * 100); }
+		</style>
 		<script>
-			// Object-fit polyfill for older browsers
+		(function(){
+			// Minimal object-fit fallback for very old browsers
 			if (!('objectFit' in document.documentElement.style)) {
 				document.addEventListener('DOMContentLoaded', function() {
-					var images = document.querySelectorAll('img[data-object-fit]');
-					images.forEach(function(img) {
-						if (img.getAttribute('data-object-fit') === 'cover') {
-							img.style.display = 'none';
-							img.parentNode.style.backgroundImage = 'url(' + img.src + ')';
-							img.parentNode.style.backgroundSize = 'cover';
-							img.parentNode.style.backgroundPosition = 'center';
-							img.parentNode.style.backgroundRepeat = 'no-repeat';
-						}
+					document.querySelectorAll('img[data-object-fit="cover"]').forEach(function(img){
+						var p = img.parentNode; if (!p) return;
+						img.style.display = 'none';
+						p.style.background = 'center/cover no-repeat url(' + img.src + ')';
 					});
 				});
 			}
 
-			// iOS Safari specific fixes
-			(function() {
-				var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-				var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-				var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-				// Enhanced mobile scrolling fixes
-				if (isMobile) {
-					// Add mobile class early
-					document.documentElement.classList.add('mobile-device');
-
-					// Prevent default touch behavior that interferes with scrolling
-					var preventDefaults = function(e) {
-						// Allow scrolling in specific areas
-						if (e.target.closest('.gallery') ||
-							e.target.closest('textarea') ||
-							e.target.closest('input') ||
-							e.target.closest('.poptrox-popup') ||
-							e.target.tagName === 'A' ||
-							e.target.tagName === 'BUTTON') {
-							return;
-						}
-
-						// Prevent bounce scrolling at document level
-						if (e.target === document || e.target === document.body) {
-							e.preventDefault();
-						}
-					};
-
-					// Improved touch event handling
-					document.addEventListener('touchstart', function(e) {
-						// Enable momentum scrolling for specific elements
-						var scrollableElements = document.querySelectorAll('.main, .gallery, .poptrox-popup');
-						scrollableElements.forEach(function(el) {
-							el.style.webkitOverflowScrolling = 'touch';
-						});
-					}, { passive: true });
-
-					document.addEventListener('touchmove', preventDefaults, { passive: false });
-				}
-
-				if (isIOS || (isSafari && /Macintosh/.test(navigator.userAgent))) {
-					// Enhanced iOS viewport height fix
-					function setVH() {
-						// Use visualViewport API if available for better accuracy
-						var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-						var vh = height * 0.01;
-						document.documentElement.style.setProperty('--vh', vh + 'px');
+			// iOS visual viewport height fix (no global touchmove prevention)
+			var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+			function setVH(){
+				var h = (window.visualViewport ? Math.round(window.visualViewport.height) : window.innerHeight) || window.innerHeight;
+				var vh = h * 0.01; document.documentElement.style.setProperty('--vh', vh + 'px');
+			}
+			if (isIOS) {
+				document.addEventListener('DOMContentLoaded', setVH, { once: true });
+				window.addEventListener('resize', setVH);
+				window.addEventListener('orientationchange', function(){ setTimeout(setVH, 200); });
+				if (window.visualViewport) window.visualViewport.addEventListener('resize', setVH);
+				// Ensure inputs remain visible when keyboard opens
+				document.addEventListener('focusin', function(e){
+					if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) {
+						setTimeout(function(){ try { e.target.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch(_){} }, 150);
 					}
-
-					// Set initial viewport height
-					setVH();
-
-					// Listen to both resize and visualViewport changes
-					window.addEventListener('resize', setVH);
-					window.addEventListener('orientationchange', function() {
-						setTimeout(setVH, 250);
-					});
-
-					// Use visualViewport API for better keyboard handling
-					if (window.visualViewport) {
-						window.visualViewport.addEventListener('resize', setVH);
-					}
-
-					// Enhanced iOS scroll prevention
-					var lastY = 0;
-					document.addEventListener('touchstart', function(e) {
-						lastY = e.touches[0].clientY;
-					}, { passive: true });
-
-					document.addEventListener('touchmove', function(e) {
-						var currentY = e.touches[0].clientY;
-						var direction = currentY > lastY ? 'down' : 'up';
-
-						// Allow scrolling in content areas
-						if (e.target.closest('.gallery') ||
-							e.target.closest('textarea') ||
-							e.target.closest('input') ||
-							e.target.closest('.main .content') ||
-							e.target.closest('.poptrox-popup')) {
-							return;
-						}
-
-						// Prevent bounce at document level
-						if ((direction === 'up' && window.pageYOffset === 0) ||
-							(direction === 'down' && window.pageYOffset >= document.documentElement.scrollHeight - window.innerHeight)) {
-							e.preventDefault();
-						}
-
-						lastY = currentY;
-					}, { passive: false });
-
-					// Fix iOS form focus zoom and scrolling issues
-					document.addEventListener('focusin', function(e) {
-						if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-							// Prevent zoom by ensuring font-size is 16px or larger
-							if (!e.target.style.fontSize || parseInt(e.target.style.fontSize) < 16) {
-								e.target.style.fontSize = '16px';
-							}
-
-							// Smooth scroll to focused element
-							setTimeout(function() {
-								e.target.scrollIntoView({
-									behavior: 'smooth',
-									block: 'center',
-									inline: 'nearest'
-								});
-							}, 300);
-						}
-					});
-
-					// Fix iOS Safari double-tap zoom
-					var lastTouchEnd = 0;
-					document.addEventListener('touchend', function(event) {
-						var now = (new Date()).getTime();
-						if (now - lastTouchEnd <= 300) {
-							event.preventDefault();
-						}
-						lastTouchEnd = now;
-					}, false);
-				}
-			})();
+				});
+			}
+		})();
 		</script>
 	</head>
 	<body class="is-preload" data-theme="dark">
@@ -378,172 +281,7 @@
 
 			</footer>
 
-		<!-- iOS Safari Compatibility JavaScript -->
-		<script>
-			// Enhanced iOS Safari Polyfills and Mobile Scrolling Fixes
-			(function() {
-				'use strict';
 
-				// Device Detection
-				var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-				var isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
-				var isIOSSafari = isIOS && isSafari;
-				var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-				// Add device classes early
-				if (isMobile) {
-					document.body.classList.add('mobile-device');
-				}
-				if (isIOSSafari) {
-					document.body.classList.add('ios-safari');
-				}
-
-				// Enhanced viewport height management
-				function setViewportHeight() {
-					var height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-					var vh = height * 0.01;
-					document.documentElement.style.setProperty('--vh', vh + 'px');
-				}
-
-				// Mobile scrolling optimization
-				function optimizeMobileScrolling() {
-					// Enable momentum scrolling for key elements
-					var scrollableElements = [
-						document.body,
-						document.querySelector('.main'),
-						document.querySelector('.gallery'),
-						document.querySelector('#header nav ul')
-					];
-
-					scrollableElements.forEach(function(element) {
-						if (element) {
-							element.style.webkitOverflowScrolling = 'touch';
-							element.style.transform = 'translateZ(0)';
-						}
-					});
-				}
-
-				// Enhanced touch event management
-				function setupTouchEvents() {
-					var startY = 0;
-					var endY = 0;
-
-					// Improved touch start handler
-					document.addEventListener('touchstart', function(e) {
-						startY = e.touches[0].pageY;
-						optimizeMobileScrolling();
-					}, { passive: true });
-
-					// Smart touch move handler
-					document.addEventListener('touchmove', function(e) {
-						endY = e.touches[0].pageY;
-						var deltaY = startY - endY;
-
-						// Allow scrolling in interactive elements
-						var allowedElements = [
-							'.gallery', '.poptrox-popup', '.main .content',
-							'textarea', 'input', '.services-list', '#header nav ul'
-						];
-
-						var isAllowedElement = allowedElements.some(function(selector) {
-							return e.target.closest(selector);
-						});
-
-						if (isAllowedElement) {
-							return;
-						}
-
-						// Prevent bounce scrolling at document boundaries
-						var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-						var scrollHeight = document.documentElement.scrollHeight;
-						var clientHeight = document.documentElement.clientHeight;
-
-						if ((deltaY > 0 && scrollTop === 0) ||
-							(deltaY < 0 && scrollTop + clientHeight >= scrollHeight)) {
-							e.preventDefault();
-						}
-					}, { passive: false });
-
-					// Prevent double-tap zoom on iOS
-					var lastTouchEnd = 0;
-					document.addEventListener('touchend', function(event) {
-						var now = (new Date()).getTime();
-						if (now - lastTouchEnd <= 300) {
-							event.preventDefault();
-						}
-						lastTouchEnd = now;
-					}, false);
-				}
-
-				// iOS specific optimizations
-				if (isIOSSafari) {
-					setViewportHeight();
-
-					// Listen to all viewport changes
-					window.addEventListener('resize', setViewportHeight);
-					window.addEventListener('orientationchange', function() {
-						setTimeout(setViewportHeight, 100);
-					});
-
-					if (window.visualViewport) {
-						window.visualViewport.addEventListener('resize', setViewportHeight);
-					}
-
-					// Form input optimization for iOS
-					document.addEventListener('DOMContentLoaded', function() {
-						var inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
-						inputs.forEach(function(input) {
-							// Prevent zoom on focus
-							if (!input.style.fontSize || parseFloat(input.style.fontSize) < 16) {
-								input.style.fontSize = '16px';
-							}
-
-							// Add hardware acceleration
-							input.style.transform = 'translateZ(0)';
-							input.style.webkitTransform = 'translateZ(0)';
-						});
-					});
-
-					// Enhanced form focus handling
-					document.addEventListener('focusin', function(e) {
-						if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-							setTimeout(function() {
-								// Smooth scroll to element
-								e.target.scrollIntoView({
-									behavior: 'smooth',
-									block: 'center',
-									inline: 'nearest'
-								});
-							}, 150);
-						}
-					});
-				}
-
-				// General mobile optimizations
-				if (isMobile) {
-					setupTouchEvents();
-					optimizeMobileScrolling();
-
-					// Prevent text selection issues on mobile
-					document.addEventListener('selectstart', function(e) {
-						if (e.target.tagName !== 'INPUT' &&
-							e.target.tagName !== 'TEXTAREA' &&
-							!e.target.closest('p, h1, h2, h3, h4, h5, h6')) {
-							e.preventDefault();
-						}
-					});
-
-					// Optimize gallery touch interaction
-					document.addEventListener('DOMContentLoaded', function() {
-						var galleryItems = document.querySelectorAll('.gallery-img');
-						galleryItems.forEach(function(item) {
-							item.style.touchAction = 'manipulation';
-							item.style.webkitTouchCallout = 'none';
-						});
-					});
-				}
-			})();
-		</script>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js" defer></script>
@@ -551,7 +289,6 @@
 			<script src="assets/js/jquery.scrollex.min.js" defer></script>
 			<script src="assets/js/browser.min.js" defer></script>
 			<script src="assets/js/breakpoints.min.js" defer></script>
-			<script src="assets/js/util.js" defer></script>
 			<script src="assets/js/main.js" defer></script>
 
 	</body>
