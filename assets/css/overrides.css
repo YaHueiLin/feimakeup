@@ -28,3 +28,11 @@ html { scroll-behavior: smooth; }
   font-weight: 600;
   color: #000 !important;
 }
+
+/* Header brand logo size (replaces inline style) */
+#header .brand img { height: 45px; display: block; }
+
+/* Social icon sizing (replaces inline style) */
+.icon i { font-size: 2rem; line-height: 1; vertical-align: middle; }
+.icons .icon i { font-size: 1.2rem; }
+.icons .icon { display: inline-flex; align-items: center; gap: 0.35rem; }

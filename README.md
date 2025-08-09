@@ -5,16 +5,12 @@ SEO Keywords: Seattle, makeup, hair, wedding, bridal, bridal makeup, bridal hair
 Single-page responsive portfolio & contact site built from the HTML5 UP "Big Picture" template, refactored for performance, accessibility, and maintainability.
 
 ## Key Features
-# Fei Lin Bridal Makeup & Hair Website
-
-Single-page responsive portfolio & contact site built from the HTML5 UP "Big Picture" template, refactored for performance, accessibility, and maintainability.
-
 ## Key Features
 - Fast initial load (deferred JS, image lazy loading, font + hero preloads)
 - Mobile-first responsive layout with persistent top navigation
 - Lightbox gallery powered by Poptrox
 - Scroll-triggered reveal animations via Scrollex (About section stays visible after first reveal)
-- Accessible semantic HTML (landmarks, descriptive alt text, form labels placeholders)
+- Accessible semantic HTML (landmarks, descriptive alt text, placeholder labels)
 - Contact form integrated with Formspree
 
 ## Tech Stack
@@ -81,6 +77,14 @@ Upload all files (including `assets/css/main.min.css`). No server build step req
 - Images are already optimized with WebP/AVIF variants for modern browsers
 - Font Awesome glyphs could be further subset to reduce bundle size
 - Consider adding CI for HTML/CSS validation + Lighthouse performance budget
+
+## Changelog (highlights)
+- fix(mobile): remove global touch blockers; improve iOS viewport height handling
+- feat(layout): stack About image above text on small screens (Safari friendly)
+- chore(html): move inline CSS/JS into `assets/css/overrides.css` and `assets/js/mobile-fixes.js`
+- fix(portfolio): normalize thumbnail sizing and remove overlay dimming
+- style(about): match About heading font with service-item titles (Caveat)
+- fix(edge): render social icons with <i> elements for reliable display
 
 ## License
 Template: Creative Commons Attribution 3.0 (HTML5 UP). Custom modifications © 2025 Fei Lin.
