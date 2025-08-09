@@ -6,6 +6,8 @@
 -->
 <html lang="en">
 	<head>
+		<!-- Browser compatibility meta tags -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<link rel="preload" href="assets/css/main.min.css" as="style" />
 		<link rel="stylesheet" href="assets/css/main.min.css" media="all" onload="this.media='all'" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
@@ -28,6 +30,33 @@
 		<link rel="preload" href="assets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+		
+		<!-- Picture element polyfill for IE/older browsers -->
+		<script>
+			document.createElement("picture");
+		</script>
+		<!--[if lt IE 9]>
+			<script src="https://cdn.jsdelivr.net/npm/picturefill@3.0.3/dist/picturefill.min.js"></script>
+		<![endif]-->
+		
+		<!-- Object-fit polyfill for IE/Edge compatibility -->
+		<script>
+			// Object-fit polyfill for older browsers
+			if (!('objectFit' in document.documentElement.style)) {
+				document.addEventListener('DOMContentLoaded', function() {
+					var images = document.querySelectorAll('img[data-object-fit]');
+					images.forEach(function(img) {
+						if (img.getAttribute('data-object-fit') === 'cover') {
+							img.style.display = 'none';
+							img.parentNode.style.backgroundImage = 'url(' + img.src + ')';
+							img.parentNode.style.backgroundSize = 'cover';
+							img.parentNode.style.backgroundPosition = 'center';
+							img.parentNode.style.backgroundRepeat = 'no-repeat';
+						}
+					});
+				});
+			}
+		</script>
 	</head>
 	<body class="is-preload" data-theme="dark">
 
@@ -87,7 +116,7 @@
 			<section id="Services" class="main style2 left dark fullscreen" role="region" aria-label="Services">
 				  <div class="services-list">
 					<div class="service-item">
-					  <img src="images/icons/services1.jpg" alt="Bridal Makeup" loading="lazy" decoding="async">
+					  <img src="images/icons/services1.jpg" alt="Bridal Makeup" loading="lazy" decoding="async" data-object-fit="cover">
 					  <h3>Bridal Makeup & Hair</h3>
 						<ul>
 						<li>．Day of makeup application & hair styled</li>
@@ -99,7 +128,7 @@
 						</ul>
 					</div>
 					<div class="service-item">
-					  <img src="images/icons/services2.jpg" alt="Event Styling" loading="lazy" decoding="async">
+					  <img src="images/icons/services2.jpg" alt="Event Styling" loading="lazy" decoding="async" data-object-fit="cover">
 					  <h3>Event Styling</h3>
 						<ul>
 						<li>．Day of makeup application & hair styled</li>
@@ -110,7 +139,7 @@
 						</ul>
 					</div>
 					<div class="service-item">
-					  <img src="images/icons/services3.jpg" alt="Bridesmaid/Mom Makeup & Hair" loading="lazy" decoding="async">
+					  <img src="images/icons/services3.jpg" alt="Bridesmaid/Mom Makeup & Hair" loading="lazy" decoding="async" data-object-fit="cover">
 					  <h3>Bridesmaid/Mom Makeup & Hair</h3>
 					 	<ul>
 						<li>．Day of makeup application & hair styled.</li>
@@ -120,7 +149,7 @@
 						</ul>
 					</div>
 					<div class="service-item">
-					  <img src="images/icons/services4.jpg" alt="Flower girl hair and light makeup" loading="lazy" decoding="async">
+					  <img src="images/icons/services4.jpg" alt="Flower girl hair and light makeup" loading="lazy" decoding="async" data-object-fit="cover">
 					  <h3>Flower girl hair and light makeup</h3>
 						<ul>
 					 	<li>．Soft, skin-friendly makeup using gentle products.</li>
@@ -128,7 +157,7 @@
 						</ul>
 					</div>
 					<div class="service-item">
-					  <img src="images/icons/services5.jpg" alt="Groom Styling" loading="lazy" decoding="async">
+					  <img src="images/icons/services5.jpg" alt="Groom Styling" loading="lazy" decoding="async" data-object-fit="cover">
 					  <h3>Groom Hair & Makeup</h3>
 					  	<ul>
 					 	<li>．Skin tone balancing and shine control for photography.</li>
@@ -137,7 +166,7 @@
 						</ul>
 					</div>
 					<div class="service-item">
-					  <img src="images/icons/services6.jpg" alt="Personal Makeup Lesson" loading="lazy" decoding="async">
+					  <img src="images/icons/services6.jpg" alt="Personal Makeup Lesson" loading="lazy" decoding="async" data-object-fit="cover">
 					  <h3>Personal Makeup Lesson</h3>
 					 	<ul>
 						<li>．Step-by-step guidance for everyday, work, or special occasion looks.</li>
@@ -158,18 +187,18 @@
 
 					<!-- Gallery with lightbox -->
 					<div class="gallery custom-gallery">
-						<a class="gallery-img image fit" href="images/fulls/01.webp" title="Bridal look 01"><picture><source type="image/webp" srcset="images/thumbs/01.webp"><img src="images/thumbs/01.jpg" alt="Bridal makeup style 01" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/02.webp" title="Bridal look 02"><picture><source type="image/webp" srcset="images/thumbs/02.webp"><img src="images/thumbs/02.jpg" alt="Bridal makeup style 02" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/03.webp" title="Bridal look 03"><picture><source type="image/webp" srcset="images/thumbs/03.webp"><img src="images/thumbs/03.jpg" alt="Bridal makeup style 03" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/04.webp" title="Bridal look 04"><picture><source type="image/webp" srcset="images/thumbs/04.webp"><img src="images/thumbs/04.jpg" alt="Bridal makeup style 04" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/05.webp" title="Bridal look 05"><picture><source type="image/webp" srcset="images/thumbs/05.webp"><img src="images/thumbs/05.jpg" alt="Bridal makeup style 05" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/06.webp" title="Bridal look 06"><picture><source type="image/webp" srcset="images/thumbs/06.webp"><img src="images/thumbs/06.jpg" alt="Bridal makeup style 06" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/07.webp" title="Bridal look 07"><picture><source type="image/webp" srcset="images/thumbs/07.webp"><img src="images/thumbs/07.jpg" alt="Bridal makeup style 07" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/08.webp" title="Bridal look 08"><picture><source type="image/webp" srcset="images/thumbs/08.webp"><img src="images/thumbs/08.jpg" alt="Bridal makeup style 08" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/09.webp" title="Bridal look 09"><picture><source type="image/webp" srcset="images/thumbs/09.webp"><img src="images/thumbs/09.jpg" alt="Bridal makeup style 09" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/10.webp" title="Bridal look 10"><picture><source type="image/webp" srcset="images/thumbs/10.webp"><img src="images/thumbs/10.jpg" alt="Bridal makeup style 10" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/11.webp" title="Bridal look 11"><picture><source type="image/webp" srcset="images/thumbs/11.webp"><img src="images/thumbs/11.jpg" alt="Bridal makeup style 11" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/12.webp" title="Bridal look 12"><picture><source type="image/webp" srcset="images/thumbs/12.webp"><img src="images/thumbs/12.jpg" alt="Bridal makeup style 12" loading="lazy" decoding="async" fetchpriority="low"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/01.webp" title="Bridal look 01"><picture><source type="image/webp" srcset="images/thumbs/01.webp"><img src="images/thumbs/01.jpg" alt="Bridal makeup style 01" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/02.webp" title="Bridal look 02"><picture><source type="image/webp" srcset="images/thumbs/02.webp"><img src="images/thumbs/02.jpg" alt="Bridal makeup style 02" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/03.webp" title="Bridal look 03"><picture><source type="image/webp" srcset="images/thumbs/03.webp"><img src="images/thumbs/03.jpg" alt="Bridal makeup style 03" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/04.webp" title="Bridal look 04"><picture><source type="image/webp" srcset="images/thumbs/04.webp"><img src="images/thumbs/04.jpg" alt="Bridal makeup style 04" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/05.webp" title="Bridal look 05"><picture><source type="image/webp" srcset="images/thumbs/05.webp"><img src="images/thumbs/05.jpg" alt="Bridal makeup style 05" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/06.webp" title="Bridal look 06"><picture><source type="image/webp" srcset="images/thumbs/06.webp"><img src="images/thumbs/06.jpg" alt="Bridal makeup style 06" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/07.webp" title="Bridal look 07"><picture><source type="image/webp" srcset="images/thumbs/07.webp"><img src="images/thumbs/07.jpg" alt="Bridal makeup style 07" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/08.webp" title="Bridal look 08"><picture><source type="image/webp" srcset="images/thumbs/08.webp"><img src="images/thumbs/08.jpg" alt="Bridal makeup style 08" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/09.webp" title="Bridal look 09"><picture><source type="image/webp" srcset="images/thumbs/09.webp"><img src="images/thumbs/09.jpg" alt="Bridal makeup style 09" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/10.webp" title="Bridal look 10"><picture><source type="image/webp" srcset="images/thumbs/10.webp"><img src="images/thumbs/10.jpg" alt="Bridal makeup style 10" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/11.webp" title="Bridal look 11"><picture><source type="image/webp" srcset="images/thumbs/11.webp"><img src="images/thumbs/11.jpg" alt="Bridal makeup style 11" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/12.webp" title="Bridal look 12"><picture><source type="image/webp" srcset="images/thumbs/12.webp"><img src="images/thumbs/12.jpg" alt="Bridal makeup style 12" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
 					</div>
 			</section>
 
