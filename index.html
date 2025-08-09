@@ -4,73 +4,191 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/LocalBusiness">
 	<head>
-		<!-- Browser compatibility meta tags -->
+		<!-- Essential Meta Tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!-- iOS Safari specific meta tags -->
+
+		<!-- SEO Meta Tags -->
+		<title>Fei Lin | Bridal Makeup & Hair Artist | Seattle</title>
+		<meta name="description" content="Professional bridal makeup and hair artist in Seattle specializing in elegant, natural looks for weddings and special events. Bilingual service (EN/中文). Book your consultation today!" />
+		<meta name="keywords" content="Seattle bridal makeup artist, wedding hair stylist, Asian bridal makeup, Seattle wedding beauty, professional makeup artist, bridal hair styling, event makeup, Seattle beauty services, Fei Lin makeup, 新娘化妝, 西雅圖化妝師" />
+		<meta name="author" content="Fei Lin" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="https://feimakeup.com/" />
+
+		<!-- Open Graph Meta Tags -->
+		<meta property="og:title" content="Fei Lin | Bridal Makeup & Hair Artist | Seattle" />
+		<meta property="og:description" content="Timeless beauty for your big day. Professional bridal and event hair & makeup in Seattle by experienced artist Fei Lin." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://feimakeup.com/" />
+		<meta property="og:image" content="https://feimakeup.com/images/fulls/01.webp" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:site_name" content="Fei Lin Makeup & Hair" />
+
+		<!-- Twitter Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Fei Lin | Bridal Makeup & Hair Artist | Seattle" />
+		<meta name="twitter:description" content="Professional bridal makeup and hair styling in Seattle. Timeless beauty for your special day." />
+		<meta name="twitter:image" content="https://feimakeup.com/images/fulls/01.webp" />
+
+		<!-- Mobile App Meta Tags -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Fei Lin Makeup">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="mobile-web-app-capable" content="yes">
-		<link rel="preload" href="assets/css/main.min.css" as="style" />
-		<link rel="stylesheet" href="assets/css/main.min.css" media="all" onload="this.media='all'" />
-		<link rel="stylesheet" href="assets/css/overrides.css" />
-		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<title>Fei Lin | Bridal Makeup & Hair | Seattle</title>
+
+		<!-- Icons and Manifest -->
 		<link rel="icon" href="other/favicon.png" type="image/png">
-		<meta charset="utf-8" />
-		<!-- Enhanced viewport for iOS Safari -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-		<meta name="description" content="Seattle-based bridal makeup and hair artist specializing in elegant, natural looks for weddings and events. Bilingual (EN/中文)." />
-		<meta property="og:title" content="Fei Lin | Bridal Makeup & Hair" />
-		<meta name="keywords" content="Seattle, makeup, hair, wedding, bridal, bridal makeup, bridal hair, wedding makeup, wedding hair, Seattle makeup artist, Seattle hair stylist, Seattle bridal, Seattle wedding, Asian bridal makeup, Asian wedding hair, event makeup, event hair, Fei Lin" />
-		<meta property="og:description" content="Timeless beauty for your big day. Bridal and event hair & makeup in Seattle." />
-		<meta property="og:type" content="website" />
-		<link rel="preload" as="image" href="images/intro.jpg"/>
-		<link rel="preload" as="image" href="images/one.jpg"/>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;900&display=swap" rel="stylesheet">
+		<link rel="apple-touch-icon" href="other/favicon.png">
+
+		<!-- Performance Critical Resources -->
+		<link rel="preload" href="assets/css/main.css" as="style" />
 		<link rel="preload" href="assets/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 		<link rel="preload" href="assets/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="preload" as="image" href="images/intro.jpg"/>
+		<link rel="preload" as="image" href="images/one.jpg"/>
+
+		<!-- External Resources -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://formspree.io">
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="assets/css/main.css" media="all" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/accessibility.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;900&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "LocalBusiness",
+			"@id": "https://feimakeup.com/#business",
+			"name": "Fei Lin Makeup & Hair",
+			"description": "Professional bridal makeup and hair artist specializing in elegant, natural looks for weddings and special events in Seattle area.",
+			"url": "https://feimakeup.com/",
+			"telephone": "",
+			"email": "mubyfei@gmail.com",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Seattle",
+				"addressRegion": "WA",
+				"addressCountry": "US"
+			},
+			"geo": {
+				"@type": "GeoCoordinates",
+				"latitude": 47.6062,
+				"longitude": -122.3321
+			},
+			"openingHours": "Mo-Su 09:00-18:00",
+			"priceRange": "$$",
+			"serviceArea": {
+				"@type": "GeoCircle",
+				"geoMidpoint": {
+					"@type": "GeoCoordinates",
+					"latitude": 47.6062,
+					"longitude": -122.3321
+				},
+				"geoRadius": 50000
+			},
+			"hasOfferCatalog": {
+				"@type": "OfferCatalog",
+				"name": "Bridal & Event Beauty Services",
+				"itemListElement": [
+					{
+						"@type": "Offer",
+						"itemOffered": {
+							"@type": "Service",
+							"name": "Bridal Makeup & Hair",
+							"description": "Complete bridal beauty package including makeup application, hair styling, and touch-up kit"
+						}
+					},
+					{
+						"@type": "Offer",
+						"itemOffered": {
+							"@type": "Service",
+							"name": "Event Styling",
+							"description": "Professional makeup and hair styling for special events and occasions"
+						}
+					},
+					{
+						"@type": "Offer",
+						"itemOffered": {
+							"@type": "Service",
+							"name": "Bridesmaid & Family Styling",
+							"description": "Makeup and hair services for bridal party members and family"
+						}
+					}
+				]
+			},
+			"founder": {
+				"@type": "Person",
+				"name": "Fei Lin",
+				"jobTitle": "Professional Makeup Artist & Hair Stylist",
+				"description": "Experienced makeup artist specializing in Asian facial features and natural beauty enhancement"
+			},
+			"sameAs": [
+				"https://www.instagram.com/fei_makeup_tw/",
+				"https://www.facebook.com/profile.php?id=100094863158609"
+			],
+			"image": "https://feimakeup.com/other/logo.png"
+		}
+		</script>
 
 		<!-- Lightweight mobile compatibility helpers -->
 		<script src="assets/js/mobile-fixes.js" defer></script>
 	</head>
 	<body class="is-preload" data-theme="dark">
+		<!-- Skip to Content Link for Accessibility -->
+		<a href="#intro" class="skip-to-content" tabindex="1">Skip to main content</a>
 
 		<!-- Header -->
-			<header id="header" role="banner">
-				<a href="#intro" aria-label="Home" class="brand"><img src="other/logo.png" alt="Fei Lin logo" decoding="async"></a>
-				<nav aria-label="Primary">
-					<ul>
-						<li><a href="#intro" aria-current="page">Home</a></li>
-						<li><a href="#About">About</a></li>
-						<li><a href="#Services">Services</a></li>
-						<li><a href="#Portfolio">Portfolio</a></li>
-						<li><a href="#contact">Contact</a></li>
-					</ul>
-				</nav>
-			</header>
+		<header id="header" role="banner" itemscope itemtype="https://schema.org/WPHeader">
+			<a href="#intro" aria-label="Go to home section" class="brand" itemprop="logo">
+				<img src="other/logo.png" alt="Fei Lin Makeup & Hair - Professional Bridal Artist" decoding="async" width="120" height="40">
+			</a>
+			<nav role="navigation" aria-label="Primary navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
+				<ul>
+					<li><a href="#intro" aria-current="page" itemprop="url"><span itemprop="name">Home</span></a></li>
+					<li><a href="#About" itemprop="url"><span itemprop="name">About</span></a></li>
+					<li><a href="#Services" itemprop="url"><span itemprop="name">Services</span></a></li>
+					<li><a href="#Portfolio" itemprop="url"><span itemprop="name">Portfolio</span></a></li>
+					<li><a href="#contact" itemprop="url"><span itemprop="name">Contact</span></a></li>
+				</ul>
+			</nav>
+		</header>
 
-		<!-- Intro -->
-			<section id="intro" class="main style1 dark fullscreen" role="region" aria-label="Hero intro">
+		<!-- Main Content -->
+		<main role="main">
+			<!-- Hero Section -->
+			<section id="intro" class="main style1 dark fullscreen" role="region" aria-labelledby="hero-heading" itemscope itemtype="https://schema.org/WPAdBlock">
 				<div class="content">
 					<header>
-						<h2>Timeless beauty for your big day.</h2>
+						<h1 id="hero-heading" itemprop="headline">Timeless beauty for your big day.</h1>
+						<p class="tagline" itemprop="description">Professional bridal makeup and hair artist in Seattle | 西雅圖專業新娘造型師</p>
 					</header>
 					<footer>
-						<a href="#About" class="button style2 down">More</a>
+						<a href="#About" class="button style2 down" aria-label="Learn more about Fei Lin">
+							<span class="sr-only">Learn</span> More
+						</a>
 					</footer>
 				</div>
 			</section>
 
 		<!-- About -->
-			<section id="About" class="main style2 right dark fullscreen" role="region" aria-labelledby="about-heading">
-				<img class="about-photo" src="other/about.jpg" alt="Fei Lin" loading="lazy" decoding="async">
+			<section id="About" class="main style2 right dark fullscreen" role="region" aria-labelledby="about-heading" itemscope itemtype="https://schema.org/AboutPage">
+				<figure class="about-image">
+					<img class="about-photo" src="other/about.jpg" alt="Fei Lin - Professional makeup artist and hair stylist" loading="lazy" decoding="async" width="600" height="800" itemprop="image">
+				</figure>
 				<div class="content box style2">
 					<header>
 						<h2 id="about-heading">About Fei Lin</h2>
@@ -95,49 +213,65 @@
 			</section>
 
 		<!-- Services -->
-			<section id="Services" class="main style2 left dark fullscreen" role="region" aria-label="Services">
-				  <div class="services-list">
-					<div class="service-item">
-					  <img src="images/icons/services1.jpg" alt="Bridal Makeup" loading="lazy" decoding="async" data-object-fit="cover">
-					  <h3>Bridal Makeup & Hair</h3>
-						<ul>
-						<li>．Day of makeup application & hair styled</li>
-						<li>．Skin prep before makeup application</li>
-						<li>．Luxury lashes (strips or individual lashes)</li>
-						<li>．Mini touch up kit</li>
-						<li>．Makeup retouch(Hourly rate applied)</li>
-						<li>．Body glow add on</li>
-						</ul>
-					</div>
-					<div class="service-item">
-					  <img src="images/icons/services2.jpg" alt="Event Styling" loading="lazy" decoding="async" data-object-fit="cover">
-					  <h3>Event Styling</h3>
-						<ul>
-						<li>．Day of makeup application & hair styled</li>
-						<li>．Skin prep before makeup application</li>
-						<li>．Luxury lashes (strips or individual lashes)</li>
-						<li>．Mini touch up kit</li>
-						<li>．Makeup retouch(Hourly rate applied)</li>
-						</ul>
-					</div>
-					<div class="service-item">
-					  <img src="images/icons/services3.jpg" alt="Bridesmaid/Mom Makeup & Hair" loading="lazy" decoding="async" data-object-fit="cover">
-					  <h3>Bridesmaid/Mom Makeup & Hair</h3>
-					 	<ul>
-						<li>．Day of makeup application & hair styled.</li>
-						<li>．Skin prep before makeup application.</li>
-						<li>．Luxury lashes. (strips or individual lashes)</li>
-						<li>．Mini touch up kit.</li>
-						</ul>
-					</div>
-					<div class="service-item">
-					  <img src="images/icons/services4.jpg" alt="Flower girl hair and light makeup" loading="lazy" decoding="async" data-object-fit="cover">
-					  <h3>Flower girl hair and light makeup</h3>
-						<ul>
-					 	<li>．Soft, skin-friendly makeup using gentle products.</li>
-						<li>．Gentle hairstyling: braids, curls, or sleek styles based on outfit and theme.</li>
-						</ul>
-					</div>
+			<section id="Services" class="main style2 left dark fullscreen" role="region" aria-labelledby="services-heading" itemscope itemtype="https://schema.org/Service">
+				<div class="services-list" role="list" itemprop="hasOfferCatalog" itemscope itemtype="https://schema.org/OfferCatalog">
+					<article class="service-item" role="listitem" itemprop="itemListElement" itemscope itemtype="https://schema.org/Offer">
+						<div class="service-icon">
+							<img src="images/icons/services1.jpg" alt="Bridal Makeup Service" loading="lazy" decoding="async" data-object-fit="cover" itemprop="image">
+						</div>
+						<div class="service-content" itemprop="itemOffered" itemscope itemtype="https://schema.org/Service">
+							<h3 itemprop="name">Bridal Makeup & Hair</h3>
+							<ul class="service-features" itemprop="description">
+								<li>Day of makeup application & hair styled</li>
+								<li>Skin prep before makeup application</li>
+								<li>Luxury lashes (strips or individual lashes)</li>
+								<li>Mini touch up kit</li>
+								<li>Makeup retouch (hourly rate applied)</li>
+								<li>Body glow add on</li>
+							</ul>
+						</div>
+					</article>
+					<article class="service-item" role="listitem" itemprop="itemListElement" itemscope itemtype="https://schema.org/Offer">
+						<div class="service-icon">
+							<img src="images/icons/services2.jpg" alt="Event Styling Service" loading="lazy" decoding="async" data-object-fit="cover" itemprop="image">
+						</div>
+						<div class="service-content" itemprop="itemOffered" itemscope itemtype="https://schema.org/Service">
+							<h3 itemprop="name">Event Styling</h3>
+							<ul class="service-features" itemprop="description">
+								<li>Day of makeup application & hair styled</li>
+								<li>Skin prep before makeup application</li>
+								<li>Luxury lashes (strips or individual lashes)</li>
+								<li>Mini touch up kit</li>
+								<li>Makeup retouch (hourly rate applied)</li>
+							</ul>
+						</div>
+					</article>
+					<article class="service-item" role="listitem" itemprop="itemListElement" itemscope itemtype="https://schema.org/Offer">
+						<div class="service-icon">
+							<img src="images/icons/services3.jpg" alt="Bridesmaid and Mother Makeup Service" loading="lazy" decoding="async" data-object-fit="cover" itemprop="image">
+						</div>
+						<div class="service-content" itemprop="itemOffered" itemscope itemtype="https://schema.org/Service">
+							<h3 itemprop="name">Bridesmaid/Mom Makeup & Hair</h3>
+							<ul class="service-features" itemprop="description">
+								<li>Day of makeup application & hair styled</li>
+								<li>Skin prep before makeup application</li>
+								<li>Luxury lashes (strips or individual lashes)</li>
+								<li>Mini touch up kit</li>
+							</ul>
+						</div>
+					</article>
+					<article class="service-item" role="listitem" itemprop="itemListElement" itemscope itemtype="https://schema.org/Offer">
+						<div class="service-icon">
+							<img src="images/icons/services4.jpg" alt="Flower Girl Hair and Makeup Service" loading="lazy" decoding="async" data-object-fit="cover" itemprop="image">
+						</div>
+						<div class="service-content" itemprop="itemOffered" itemscope itemtype="https://schema.org/Service">
+							<h3 itemprop="name">Flower Girl Hair & Light Makeup</h3>
+							<ul class="service-features" itemprop="description">
+								<li>Soft, skin-friendly makeup using gentle products</li>
+								<li>Gentle hairstyling: braids, curls, or sleek styles based on outfit and theme</li>
+							</ul>
+						</div>
+					</article>
 					<div class="service-item">
 					  <img src="images/icons/services5.jpg" alt="Groom Styling" loading="lazy" decoding="async" data-object-fit="cover">
 					  <h3>Groom Hair & Makeup</h3>
@@ -169,18 +303,18 @@
 
 					<!-- Gallery with lightbox -->
 					<div class="gallery custom-gallery">
-						<a class="gallery-img image fit" href="images/fulls/01.webp"><picture><source type="image/webp" srcset="images/thumbs/01.webp"><img src="images/thumbs/01.jpg" alt="Bridal makeup style 01" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/02.webp"><picture><source type="image/webp" srcset="images/thumbs/02.webp"><img src="images/thumbs/02.jpg" alt="Bridal makeup style 02" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/03.webp"><picture><source type="image/webp" srcset="images/thumbs/03.webp"><img src="images/thumbs/03.jpg" alt="Bridal makeup style 03" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/04.webp"><picture><source type="image/webp" srcset="images/thumbs/04.webp"><img src="images/thumbs/04.jpg" alt="Bridal makeup style 04" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/05.webp"><picture><source type="image/webp" srcset="images/thumbs/05.webp"><img src="images/thumbs/05.jpg" alt="Bridal makeup style 05" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/06.webp"><picture><source type="image/webp" srcset="images/thumbs/06.webp"><img src="images/thumbs/06.jpg" alt="Bridal makeup style 06" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/07.webp"><picture><source type="image/webp" srcset="images/thumbs/07.webp"><img src="images/thumbs/07.jpg" alt="Bridal makeup style 07" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/08.webp"><picture><source type="image/webp" srcset="images/thumbs/08.webp"><img src="images/thumbs/08.jpg" alt="Bridal makeup style 08" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/09.webp"><picture><source type="image/webp" srcset="images/thumbs/09.webp"><img src="images/thumbs/09.jpg" alt="Bridal makeup style 09" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/10.webp"><picture><source type="image/webp" srcset="images/thumbs/10.webp"><img src="images/thumbs/10.jpg" alt="Bridal makeup style 10" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/11.webp"><picture><source type="image/webp" srcset="images/thumbs/11.webp"><img src="images/thumbs/11.jpg" alt="Bridal makeup style 11" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
-						<a class="gallery-img image fit" href="images/fulls/12.webp"><picture><source type="image/webp" srcset="images/thumbs/12.webp"><img src="images/thumbs/12.jpg" alt="Bridal makeup style 12" loading="lazy" decoding="async" data-object-fit="cover"></picture></a>
+						<a class="gallery-img image fit" href="images/fulls/01.webp"><img src="images/thumbs/01.webp" alt="Bridal makeup style 01" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/02.webp"><img src="images/thumbs/02.webp" alt="Bridal makeup style 02" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/03.webp"><img src="images/thumbs/03.webp" alt="Bridal makeup style 03" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/04.webp"><img src="images/thumbs/04.webp" alt="Bridal makeup style 04" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/05.webp"><img src="images/thumbs/05.webp" alt="Bridal makeup style 05" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/06.webp"><img src="images/thumbs/06.webp" alt="Bridal makeup style 06" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/07.webp"><img src="images/thumbs/07.webp" alt="Bridal makeup style 07" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/08.webp"><img src="images/thumbs/08.webp" alt="Bridal makeup style 08" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/09.webp"><img src="images/thumbs/09.webp" alt="Bridal makeup style 09" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/10.webp"><img src="images/thumbs/10.webp" alt="Bridal makeup style 10" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/11.webp"><img src="images/thumbs/11.webp" alt="Bridal makeup style 11" loading="lazy" decoding="async" data-object-fit="cover"></a>
+						<a class="gallery-img image fit" href="images/fulls/12.webp"><img src="images/thumbs/12.webp" alt="Bridal makeup style 12" loading="lazy" decoding="async" data-object-fit="cover"></a>
 					</div>
 			</section>
 
@@ -240,6 +374,7 @@
 			<script src="assets/js/browser.min.js" defer></script>
 			<script src="assets/js/breakpoints.min.js" defer></script>
 			<script src="assets/js/main.js" defer></script>
+			<script src="assets/js/mobile-fixes.js" defer></script>
 
 	</body>
 </html>

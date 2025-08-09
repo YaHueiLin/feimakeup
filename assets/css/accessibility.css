@@ -1,0 +1,127 @@
+/* ===========================
+   ACCESSIBILITY ENHANCEMENTS
+   =========================== */
+
+/* Skip to content link for screen readers */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  z-index: 1000;
+  padding: 8px 16px;
+  background: var(--color-primary, #2c3e50);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: top 0.3s ease;
+
+  &:focus {
+    top: 6px;
+    outline: 2px solid var(--color-accent, #e74c3c);
+    outline-offset: 2px;
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: initial;
+  margin: initial;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Enhanced focus styles */
+:focus {
+  outline: 2px solid var(--color-accent, #e74c3c);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent, #e74c3c);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .lightbox-nav,
+  .lightbox-close {
+    background: black !important;
+    color: white !important;
+    border: 2px solid white !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .poptrox-popup {
+    transition: none !important;
+  }
+}
+
+/* Enhanced button and link accessibility */
+button,
+.button,
+a[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improved color contrast for light backgrounds */
+.service-item h3,
+.about-heading,
+.section-subtitle {
+  color: var(--color-text-high-contrast, #1a1a1a);
+}
+
+/* Language attribute styling */
+[lang="zh-TW"] {
+  font-family: "Source Sans Pro", "Microsoft JhengHei", "PingFang TC", "Hiragino Sans GB", sans-serif;
+  line-height: 1.7;
+}
+
+/* Print styles for accessibility */
+@media print {
+  .skip-to-content,
+  .lightbox-controls,
+  .poptrox-overlay {
+    display: none !important;
+  }
+
+  .social-links a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
