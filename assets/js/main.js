@@ -199,7 +199,7 @@
 
 					// Update scrolly links.
 						$('a[href^="#"]').scrolly({
-							speed: 1500,
+							speed: 500,  // 這裡控制滾動速度（毫秒）
 							offset: $header.outerHeight() - 1
 						});
 

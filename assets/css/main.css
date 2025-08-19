@@ -2085,6 +2085,24 @@ input, select, textarea {
 			background-attachment: scroll !important;
 		}
 
+		/* Force mobile-style background for all resolutions */
+		.main,
+		#intro,
+		#one,
+		#two {
+			background-attachment: scroll !important;
+		}
+
+		/* Optimize background positioning for mobile-style layout */
+		#intro {
+			background-position: top left, center center !important;
+		}
+
+		#one,
+		#two {
+			background-position: top left, center center !important;
+		}
+
 		@media screen and (max-width: 1920px) {
 
 			.main.style2 .content {
@@ -2109,7 +2127,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 1920px) {
 
 			.main > .content br {
 				display: none;
@@ -2369,6 +2387,8 @@ input, select, textarea {
 	border-radius: 8px;
 	text-align: center;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	color: #000000;
+	font-weight: 500;
 }
 
 .service-item:hover {
@@ -2390,21 +2410,23 @@ input, select, textarea {
 }
 
 .service-item h3 {
-	color: #ffffff;
+	color: #000000;
 	font-size: 1.2rem;
 	margin-bottom: 1rem;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .service-item ul {
 	text-align: left;
-	color: rgba(255, 255, 255, 0.8);
+	color: #000000;
 	line-height: 1.6;
+	font-weight: 500;
 }
 
 .service-item li {
 	margin-bottom: 0.5rem;
 	font-size: 0.9rem;
+	font-weight: 500;
 }
 
 /* Custom Gallery Grid */
