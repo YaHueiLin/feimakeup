@@ -1,7 +1,7 @@
 /*
-	Big Picture by HTML5 UP - Feimakeup 修改版
+	Big Picture by HTML5 UP
 	html5up.net | @ajlkn
-	修改：保持 header 永久顯示，其他功能完全匹配原始範本
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
 (function($) {
@@ -43,9 +43,38 @@
 
 		}
 
-	// Header - 修改為永久顯示
-		// 移除原始的 header.alt 邏輯，確保 header 永久顯示
-		$header.removeClass('alt');
+	// Fix: IE flexbox fix.
+		if (browser.name == 'ie') {
+
+			var $main = $('.main.fullscreen'),
+				IEResizeTimeout;
+
+			$window
+				.on('resize.ie-flexbox-fix', function() {
+
+					clearTimeout(IEResizeTimeout);
+
+					IEResizeTimeout = setTimeout(function() {
+
+						var wh = $window.height();
+
+						$main.each(function() {
+
+							var $this = $(this);
+
+							$this.css('height', '');
+
+							if ($this.height() <= wh)
+								$this.css('height', (wh - 50) + 'px');
+
+						});
+
+					});
+
+				})
+				.triggerHandler('resize.ie-flexbox-fix');
+
+		}
 
 	// Gallery.
 		$window.on('load', function() {
@@ -108,8 +137,7 @@
 							leave:		function() { $(this).addClass('inactive'); }
 						});
 
-					// For generic style2 sections except #About (About), keep default behavior.
-					$('.main.style2').not('#About')
+					$('.main.style2')
 						.scrollex({
 							mode:		'middle',
 							delay:		100,
@@ -117,17 +145,6 @@
 							terminate:	function() { $(this).removeClass('inactive'); },
 							enter:		function() { $(this).removeClass('inactive'); },
 							leave:		function() { $(this).addClass('inactive'); }
-						});
-
-					// About section (#About): animate in once, then stay visible (no leave re-hide).
-					$('#About')
-						.scrollex({
-							mode:		'middle',
-							delay:		100,
-							initialize:	function() { $(this).addClass('inactive'); },
-							terminate:	function() { $(this).removeClass('inactive'); },
-							enter:		function() { $(this).removeClass('inactive'); },
-							leave:		function() { /* keep visible after first animation */ }
 						});
 
 				// Contact.
@@ -179,6 +196,12 @@
 				clearTimeout(resizeTimeout);
 
 				resizeTimeout = setTimeout(function() {
+
+					// Update scrolly links.
+						$('a[href^="#"]').scrolly({
+							speed: 1500,
+							offset: $header.outerHeight() - 1
+						});
 
 					// Re-enable animations/transitions.
 						setTimeout(function() {
