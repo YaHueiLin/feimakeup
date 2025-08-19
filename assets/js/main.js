@@ -11,14 +11,10 @@
 		$header = $('#header'),
 		$all = $body.add($header);
 
-	// Breakpoints.
+	// Breakpoints: simplified to mobile and desktop
 		breakpoints({
-			xxlarge: [ '1681px',  '1920px' ],
-			xlarge:  [ '1281px',  '1680px' ],
-			large:   [ '1001px',  '1280px' ],
-			medium:  [ '737px',   '1000px' ],
-			small:   [ '481px',   '736px'  ],
-			xsmall:  [ null,      '480px'  ]
+			mobile: [ null, '768px' ],
+			desktop: [ '769px', null ]
 		});
 
 	// Play initial animations on page load.
@@ -33,11 +29,12 @@
 			$body.addClass('is-touch');
 		else {
 
-			breakpoints.on('<=small', function() {
+			// Mobile: treat as touch
+			breakpoints.on('<=mobile', function() {
 				$body.addClass('is-touch');
 			});
 
-			breakpoints.on('>small', function() {
+			breakpoints.on('>mobile', function() {
 				$body.removeClass('is-touch');
 			});
 
@@ -94,14 +91,14 @@
 				usePopupNav: true
 			});
 
-			// Hack: Adjust margins when 'small' activates.
-				breakpoints.on('>small', function() {
+				// Adjust margins when mobile/desktop changes.
+				breakpoints.on('>mobile', function() {
 					$gallery.each(function() {
 						$(this)[0]._poptrox.windowMargin = 50;
 					});
 				});
 
-				breakpoints.on('<=small', function() {
+				breakpoints.on('<=mobile', function() {
 					$gallery.each(function() {
 						$(this)[0]._poptrox.windowMargin = 5;
 					});
@@ -127,7 +124,7 @@
 						});
 
 				// Generic sections.
-					$('.main.style1')
+					$('.main.style1:not(#intro)')
 						.scrollex({
 							mode:		'middle',
 							delay:		100,
@@ -167,7 +164,7 @@
 						.unscrollex();
 
 				// Generic sections.
-					$('.main.style1')
+					$('.main.style1:not(#intro)')
 						.unscrollex();
 
 					$('.main.style2')
@@ -179,8 +176,8 @@
 
 			};
 
-			breakpoints.on('<=small', off);
-			breakpoints.on('>small', on);
+			breakpoints.on('<=mobile', off);
+			breakpoints.on('>mobile', on);
 
 		}
 

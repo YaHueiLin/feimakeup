@@ -507,7 +507,7 @@ input, select, textarea {
 		letter-spacing: 0.025em;
 	}
 
-		@media screen and (max-width: 1920px) {
+		@media screen and (min-width: 769px) {
 
 			body, input, textarea, select {
 				font-size: 17pt;
@@ -515,7 +515,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 1680px) {
+		@media screen and (min-width: 769px) {
 
 			body, input, textarea, select {
 				font-size: 15pt;
@@ -523,7 +523,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 1280px) {
+		@media screen and (min-width: 769px) {
 
 			body, input, textarea, select {
 				font-size: 13pt;
@@ -531,7 +531,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 1000px) {
+		@media screen and (min-width: 769px) {
 
 			body, input, textarea, select {
 				font-size: 13pt;
@@ -539,7 +539,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 768px) {
 
 			body, input, textarea, select {
 				font-size: 12pt;
@@ -565,7 +565,7 @@ input, select, textarea {
 		letter-spacing: -0.05em;
 	}
 
-	@media screen and (max-width: 736px) {
+	@media screen and (max-width: 768px) {
 
 		h2 {
 			font-size: 1.5em;
@@ -633,7 +633,7 @@ input, select, textarea {
 			padding: 3.5em 2.5em 3.5em 2.5em;
 		}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 768px) {
 
 			.box {
 				padding: 1em;
@@ -811,7 +811,7 @@ input, select, textarea {
 					width: calc(25% - 0.375em);
 				}
 
-		@media screen and (max-width: 480px) {
+		@media screen and (max-width: 768px) {
 
 			form > .fields {
 				width: calc(100% + 2em);
@@ -1098,7 +1098,7 @@ input, select, textarea {
 				width: 100%;
 			}
 
-		@media screen and (max-width: 480px) {
+		@media screen and (max-width: 768px) {
 
 			ul.actions:not(.fixed) {
 				-moz-flex-direction: column;
@@ -1350,7 +1350,7 @@ input, select, textarea {
 			opacity: 1.0 !important;
 		}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 768px) {
 
 			.poptrox-popup .nav-next:before,
 			.poptrox-popup .nav-previous:before {
@@ -1761,7 +1761,7 @@ input, select, textarea {
 				transform: translateY(7em);
 			}
 
-		@media screen and (max-width: 480px) {
+		@media screen and (max-width: 768px) {
 
 			.gallery {
 				-moz-flex-wrap: nowrap;
@@ -1854,7 +1854,7 @@ input, select, textarea {
 						outline: 0;
 					}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 768px) {
 
 			#header {
 				height: 2.5em;
@@ -1916,7 +1916,7 @@ input, select, textarea {
 		padding-top: 3em;
 	}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 768px) {
 
 			body {
 				padding-top: 2.5em;
@@ -2103,7 +2103,7 @@ input, select, textarea {
 			background-position: top left, center center !important;
 		}
 
-		@media screen and (max-width: 1920px) {
+		@media screen and (min-width: 769px) {
 
 			.main.style2 .content {
 				width: 40%;
@@ -2111,7 +2111,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 1280px) {
+		@media screen and (min-width: 769px) {
 
 			.main.style2 .content {
 				width: 50%;
@@ -2119,7 +2119,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 1000px) {
+		@media screen and (min-width: 769px) {
 
 			.main.style2 .content {
 				width: 60%;
@@ -2127,7 +2127,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 1920px) {
+		@media screen and (min-width: 769px) {
 
 			.main > .content br {
 				display: none;
@@ -2154,7 +2154,9 @@ input, select, textarea {
 				}
 
 				.main.style2 .button.anchored {
-					display: none;
+					/* Make anchored down button always visible and centered */
+					display: block !important;
+					z-index: 1000;
 				}
 
 				.main.style2 .content {
@@ -2174,7 +2176,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 480px) {
+		@media screen and (max-width: 768px) {
 
 			.main > .content {
 				max-width: calc(100% - 1.5em);
@@ -2227,7 +2229,7 @@ input, select, textarea {
 				font-size: 0.9em;
 			}
 
-		@media screen and (max-width: 1000px) {
+		@media screen and (min-width: 769px) {
 
 			#footer {
 				-moz-flex-direction: column;
@@ -2249,7 +2251,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 768px) {
 
 			#footer ul.menu li {
 				border-left: none;
@@ -2320,7 +2322,7 @@ input, select, textarea {
 			transform: translateY(100%);
 		}
 
-		@media screen and (max-width: 736px) {
+		@media screen and (max-width: 768px) {
 
 			#contact .box {
 				padding: 1.5em 1.5em 2em 1.5em;
@@ -2328,7 +2330,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 480px) {
+		@media screen and (max-width: 768px) {
 
 			#contact .box {
 				padding: 1em 1em 2em 1em;
@@ -2378,7 +2380,7 @@ input, select, textarea {
 	gap: 2rem;
 	padding: 2rem;
 	max-width: 1200px;
-	margin: 0 auto;
+	margin:  0 auto;
 }
 
 .service-item {
@@ -2460,6 +2462,22 @@ input, select, textarea {
 	-webkit-transform: translateZ(0);
 }
 
+/* Increase size and weight of hero heading */
+#intro .content header #hero-heading {
+  font-size: 3.5rem; /* desktop: larger */
+  font-weight: 900;  /* very bold */
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6em;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+  #intro .content header #hero-heading {
+    font-size: 2rem; /* smaller on mobile */
+    line-height: 1.1;
+  }
+}
 /* Responsive Design */
 @media screen and (max-width: 980px) {
 	.about-photo {
@@ -2485,7 +2503,7 @@ input, select, textarea {
 	}
 }
 
-@media screen and (max-width: 736px) {
+@media screen and (max-width: 768px) {
 	.services-list {
 		grid-template-columns: 1fr;
 		gap: 0.8rem;
@@ -2556,7 +2574,7 @@ input, select, textarea {
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
 	.service-item {
 		padding: 0.8rem;
 	}
