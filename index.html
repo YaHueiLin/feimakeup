@@ -59,12 +59,10 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link rel="preconnect" href="https://formspree.io">
 
-		<!-- Stylesheets -->
+		<!-- Stylesheets - 原始範本 + 最小修正 -->
 		<link rel="stylesheet" href="assets/css/main.css" media="all" />
 		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-		<link rel="stylesheet" href="assets/css/accessibility.css" />
-		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/header-fix-minimal.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<!-- Structured Data -->
@@ -143,9 +141,6 @@
 			"image": "https://feimakeup.com/other/logo.png"
 		}
 		</script>
-
-		<!-- Lightweight mobile compatibility helpers -->
-		<script src="assets/js/mobile-fixes.js" defer></script>
 	</head>
 	<body class="is-preload" data-theme="dark">
 		<!-- Skip to Content Link for Accessibility -->
@@ -153,9 +148,9 @@
 
 		<!-- Header -->
 		<header id="header" role="banner" itemscope itemtype="https://schema.org/WPHeader">
-			<a href="#intro" aria-label="Go to home section" class="brand" itemprop="logo">
+			<h1><a href="#intro" aria-label="Go to home section" itemprop="logo">
 				<img src="other/logo.png" alt="Fei Lin Makeup & Hair - Professional Bridal Artist" decoding="async" width="120" height="40">
-			</a>
+			</a></h1>
 			<nav role="navigation" aria-label="Primary navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
 				<ul>
 					<li><a href="#intro" aria-current="page" itemprop="url"><span itemprop="name">Home</span></a></li>
@@ -367,14 +362,14 @@
 
 
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js" defer></script>
-			<script src="assets/js/jquery.poptrox.min.js" defer></script>
-			<script src="assets/js/jquery.scrollex.min.js" defer></script>
-			<script src="assets/js/browser.min.js" defer></script>
-			<script src="assets/js/breakpoints.min.js" defer></script>
-			<script src="assets/js/main.js" defer></script>
-			<script src="assets/js/mobile-fixes.js" defer></script>
+		<!-- Scripts - HTML5 UP Big Picture 原始順序 -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/main.js"></script>
 
 	</body>
 </html>

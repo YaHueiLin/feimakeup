@@ -1,7 +1,7 @@
 /*
-	Big Picture by HTML5 UP
+	Big Picture by HTML5 UP - Feimakeup 修改版
 	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	修改：保持 header 永久顯示，其他功能完全匹配原始範本
 */
 
 (function($) {
@@ -43,63 +43,29 @@
 
 		}
 
+	// Header - 修改為永久顯示
+		// 移除原始的 header.alt 邏輯，確保 header 永久顯示
+		$header.removeClass('alt');
+
 	// Gallery.
 		$window.on('load', function() {
 
 			var $gallery = $('.gallery');
 
-		$gallery.poptrox({
-			baseZIndex: 10001,
-			useBodyOverflow: false,
-			usePopupEasyClose: false,
-			overlayColor: '#1f2328',
-			overlayOpacity: 0.65,
-			usePopupDefaultStyling: false,
-			usePopupCaption: false,
-			popupLoaderText: '',
-			windowMargin: 50,
-			usePopupNav: true,
-			popupIsFixed: false,
-			onPopupOpen: function() {
-				// 等待 DOM 更新後再調整位置
-				setTimeout(function() {
-					var $overlay = $('.poptrox-overlay');
-					var $popup = $('.poptrox-popup');
-					var scrollTop = $(window).scrollTop();
-					var windowHeight = $(window).height();
-					var documentHeight = $(document).height();
+			$gallery.poptrox({
+				baseZIndex: 10001,
+				useBodyOverflow: false,
+				usePopupEasyClose: false,
+				overlayColor: '#1f2328',
+				overlayOpacity: 0.65,
+				usePopupDefaultStyling: false,
+				usePopupCaption: true,
+				popupLoaderText: '',
+				windowMargin: 50,
+				usePopupNav: true
+			});
 
-					console.log('ScrollTop:', scrollTop, 'WindowHeight:', windowHeight);
-
-					// 完全覆蓋 poptrox 的 CSS
-					$overlay.attr('style',
-						'position: absolute !important; ' +
-						'top: 0px !important; ' +
-						'left: 0px !important; ' +
-						'width: 100% !important; ' +
-						'height: ' + documentHeight + 'px !important; ' +
-						'z-index: 10001 !important; ' +
-						'text-align: center !important; ' +
-						'cursor: pointer !important; ' +
-						'background: rgba(31, 35, 40, 0.65) !important;'
-					);
-
-					// 計算 popup 的絕對位置（當前視窗中心）
-					var popupTop = scrollTop + (windowHeight / 2);
-
-					$popup.attr('style',
-						'position: absolute !important; ' +
-						'top: ' + popupTop + 'px !important; ' +
-						'left: 50% !important; ' +
-						'transform: translate(-50%, -50%) !important; ' +
-						'z-index: 10002 !important; ' +
-						'display: inline-block !important; ' +
-						'vertical-align: middle !important; ' +
-						'cursor: auto !important;'
-					);
-				}, 100);
-			}
-		});			// Hack: Adjust margins when 'small' activates.
+			// Hack: Adjust margins when 'small' activates.
 				breakpoints.on('>small', function() {
 					$gallery.each(function() {
 						$(this)[0]._poptrox.windowMargin = 50;
