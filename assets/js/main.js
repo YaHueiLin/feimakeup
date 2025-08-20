@@ -213,4 +213,53 @@
 				$window.trigger('resize');
 			});
 
+	// Background Carousel for Intro Section
+		$(document).ready(function() {
+			var $slides = $('.carousel-slide');
+			var currentSlide = 0;
+			var totalSlides = $slides.length;
+			var slideInterval;
+
+			function nextSlide() {
+				$slides.eq(currentSlide).removeClass('active');
+				currentSlide = (currentSlide + 1) % totalSlides;
+				$slides.eq(currentSlide).addClass('active');
+			}
+
+			function startCarousel() {
+				if (totalSlides > 1) {
+					slideInterval = setInterval(nextSlide, 4000); // 5 seconds
+				}
+			}
+
+			function stopCarousel() {
+				if (slideInterval) {
+					clearInterval(slideInterval);
+				}
+			}
+
+			// Preload images for smoother transitions
+			var imagePaths = [
+				'images/cover/1.webp',
+				'images/cover/2.webp',
+				'images/cover/3.webp',
+				'images/cover/4.webp',
+				'images/cover/5.webp'
+			];
+
+			imagePaths.forEach(function(path) {
+				var img = new Image();
+				img.src = path;
+			});
+
+			// Start carousel
+			startCarousel();
+
+			// Pause on hover (optional)
+			$('#intro').hover(
+				function() { stopCarousel(); },
+				function() { startCarousel(); }
+			);
+		});
+
 })(jQuery);
