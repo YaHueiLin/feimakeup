@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resolution Test - Fei Makeup</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", "微軟正黑體", "PingFang TC", "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .resolution-display {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .resolution-display h3 {
+            margin: 0 0 10px 0;
+            color: #4CAF50;
+            font-size: 16px;
+        }
+
+        .resolution-display .info-row {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            min-width: 220px;
+        }
+
+        .resolution-display .label {
+            color: #ccc;
+            margin-right: 10px;
+        }
+
+        .resolution-display .value {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .device-type {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .device-mobile {
+            background: #ff4757;
+            color: white;
+        }
+
+        .device-tablet {
+            background: #ffa726;
+            color: white;
+        }
+
+        .device-desktop {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .main-content {
+            padding: 120px 20px 20px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .test-sections {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+        }
+
+        @media screen and (min-width: 769px) {
+            .test-sections {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .test-sections {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .test-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-card h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .breakpoint-info {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .breakpoint-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .breakpoint-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .breakpoint-item {
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #ccc;
+        }
+
+        .breakpoint-active {
+            background: #e8f5e8;
+            border-left-color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .original-site-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .original-site-link:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="resolution-display" id="resolutionDisplay">
+        <h3>📱 螢幕解析度</h3>
+        <div class="info-row">
+            <span class="label">視窗寬度:</span>
+            <span class="value" id="windowWidth">-</span>
+        </div>
+        <div class="info-row">
+            <span class="label">視窗高度:</span>
+            <span class="value" id="windowHeight">-</span>
+        </div>
+        <div class="info-row">
+            <span class="label">螢幕寬度:</span>
+            <span class="value" id="screenWidth">-</span>
+        </div>
+        <div class="info-row">
+            <span class="label">螢幕高度:</span>
+            <span class="value" id="screenHeight">-</span>
+        </div>
+        <div class="info-row">
+            <span class="label">裝置像素比:</span>
+            <span class="value" id="devicePixelRatio">-</span>
+        </div>
+        <div class="device-type" id="deviceType">判斷中...</div>
+    </div>
+
+    <a href="index.html" class="original-site-link">回到原網站</a>
+
+    <div class="main-content">
+        <h1 style="text-align: center; color: white; margin-bottom: 30px;">🔍 解析度測試工具</h1>
+
+        <div class="breakpoint-info">
+            <h3>🎯 當前網站的斷點設定</h3>
+            <div class="breakpoint-list" id="breakpointList">
+                <div class="breakpoint-item" data-breakpoint="mobile">
+                    <strong>📱 手機</strong> - 最大寬度 768px
+                </div>
+                <div class="breakpoint-item" data-breakpoint="tablet">
+                    <strong>📋 平板</strong> - 寬度 769px - 980px
+                </div>
+                <div class="breakpoint-item" data-breakpoint="desktop">
+                    <strong>💻 桌面</strong> - 最小寬度 981px
+                </div>
+            </div>
+        </div>
+
+        <div class="test-sections">
+            <div class="test-card">
+                <h4>🎨 CSS Media Query 測試</h4>
+                <p>調整瀏覽器視窗大小，觀察上方解析度資訊的變化。</p>
+                <ul>
+                    <li>手機: ≤768px</li>
+                    <li>平板: 769px-980px</li>
+                    <li>桌面: ≥981px</li>
+                </ul>
+            </div>
+
+            <div class="test-card">
+                <h4>📐 About 圖片圓角測試</h4>
+                <p>在不同解析度下測試 about 區塊圖片的圓角效果：</p>
+                <ul>
+                    <li>手機: 30px 圓角</li>
+                    <li>平板/桌面: 20px 圓角 + 間距</li>
+                </ul>
+            </div>
+
+            <div class="test-card">
+                <h4>🎪 輪播功能測試</h4>
+                <p>首頁 Hero 區塊的背景圖片輪播在所有解析度下都應該正常運作。</p>
+                <ul>
+                    <li>自動輪播: 4秒切換</li>
+                    <li>懸停暫停功能</li>
+                    <li>平滑過渡效果</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateResolution() {
+            // 取得視窗尺寸
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            // 取得螢幕尺寸
+            const screenWidth = screen.width;
+            const screenHeight = screen.height;
+
+            // 取得裝置像素比
+            const devicePixelRatio = window.devicePixelRatio || 1;
+
+            // 更新顯示
+            document.getElementById('windowWidth').textContent = windowWidth + 'px';
+            document.getElementById('windowHeight').textContent = windowHeight + 'px';
+            document.getElementById('screenWidth').textContent = screenWidth + 'px';
+            document.getElementById('screenHeight').textContent = screenHeight + 'px';
+            document.getElementById('devicePixelRatio').textContent = devicePixelRatio.toFixed(2);
+
+            // 判斷裝置類型
+            let deviceType = '';
+            let deviceClass = '';
+
+            if (windowWidth <= 768) {
+                deviceType = '📱 手機';
+                deviceClass = 'device-mobile';
+                updateBreakpointHighlight('mobile');
+            } else if (windowWidth <= 980) {
+                deviceType = '📋 平板';
+                deviceClass = 'device-tablet';
+                updateBreakpointHighlight('tablet');
+            } else {
+                deviceType = '💻 桌面';
+                deviceClass = 'device-desktop';
+                updateBreakpointHighlight('desktop');
+            }
+
+            const deviceTypeElement = document.getElementById('deviceType');
+            deviceTypeElement.textContent = deviceType;
+            deviceTypeElement.className = 'device-type ' + deviceClass;
+        }
+
+        function updateBreakpointHighlight(activeBreakpoint) {
+            const breakpointItems = document.querySelectorAll('.breakpoint-item');
+            breakpointItems.forEach(item => {
+                item.classList.remove('breakpoint-active');
+                if (item.dataset.breakpoint === activeBreakpoint) {
+                    item.classList.add('breakpoint-active');
+                }
+            });
+        }
+
+        // 初始化
+        updateResolution();
+
+        // 監聽視窗大小改變
+        window.addEventListener('resize', updateResolution);
+
+        // 每秒更新一次（以防萬一）
+        setInterval(updateResolution, 1000);
+
+        // 鍵盤快捷鍵
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        console.log('📏 解析度測試工具已載入');
+        console.log('💡 提示: 按 ESC 鍵可快速返回原網站');
+    </script>
+</body>
+</html>
